@@ -60,9 +60,9 @@ export class BreadcrumbComponent {
         }
         //for helptext
         if (node.data['helptext']) {
-            console.log(node.data['helptext']);
+            //console.log(node.data['helptext']);
             this.helptext =  node.data['helptext'];
-            console.log(this.helptext);
+            //console.log(this.helptext);
         }
         if (node.firstChild) {
             this.parseRoute(node.firstChild);

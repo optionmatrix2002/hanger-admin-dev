@@ -9,6 +9,7 @@ import { VocabComponent } from './pages/vocab/vocab.component';
 import { ViolationsComponent } from './pages/violations/violations.component';
 import { IPComponent } from './pages/ip/ip.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
+import { LookupComponent } from './pages/lookup/lookup.component';
 import { ItemsComponent } from './pages/items/items.component';
 import { Routes, RouterModule, PreloadAllModules  } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
@@ -26,7 +27,8 @@ export const routes: Routes = [
             { path: 'dashboard', component: AdminDashboardComponent, data: { breadcrumb: 'Dashboard', helptext:{heading:'Dashboard', text:'This section provides summary of the trends & statistics'} } },
             { path: 'posts', component: PostsComponent, data: { breadcrumb: 'Posts', helptext:{heading:'Posts', text:'This page is used to moderate posts'} } },
             { path: 'events', component: EventsComponent, data: { breadcrumb: 'Events', helptext:{heading:'Events', text:'This page is used to moderate events'} } },
-            { path: 'badges', component: BadgesComponent, data: { breadcrumb: 'Badges', helptext:{heading:'Badges', text:'This page is used to add badges & criteria of qualification'} } },
+            //{ path: 'rewards', component: BadgesComponent, data: { breadcrumb: 'Badges', helptext:{heading:'Badges', text:'This page is used to add badges & criteria of qualification'} } },
+            { path: 'rewards', loadChildren: './pages/rewards/rewards.module#RewardsModule', data: { breadcrumb: 'Badges', helptext:{heading:'Badges', text:'This page is used to add badges & criteria of qualification'} } },
             { path: 'gigs', component: GigsComponent, data: { breadcrumb: 'Gigs', helptext:{heading:'Gigs', text:'This page is used to moderate gigs'} } },
             { path: 'projects', component: ProjectsComponent, data: { breadcrumb: 'Projects', helptext:{heading:'Projects', text:'This page is used to moderate projects'} } },
             { path: 'announcements', component: AnnouncementsComponent, data: { breadcrumb: 'Announcements', helptext:{heading:'Announcements', text:'This page is used to publish announcements'} } },
@@ -35,6 +37,7 @@ export const routes: Routes = [
             { path: 'ip', component: IPComponent, data: { breadcrumb: 'IP', helptext:{heading:'IP', text:'This page is used to add restricted IPs'} } },
             { path: 'items', component: ItemsComponent, data: { breadcrumb: 'Items', helptext:{heading:'Items', text:'This page is used to manage Items'} } },
             { path: 'notifications', component: NotificationsComponent, data: { breadcrumb: 'Notifications', helptext:{heading:'Notifications', text:'This page is used to manage notification settings.'} } },
+            { path: 'lookups', component: LookupComponent, data: { breadcrumb: 'Lookups', helptext:{heading:'Lookups', text:'This page is used to manage lookups.'} } },
             /* { path: 'users', loadChildren: './pages/users/users.module#UsersModule', data: { breadcrumb: 'Users' } }, */
             /* { path: 'ui', loadChildren: './pages/ui/ui.module#UiModule', data: { breadcrumb: 'UI' } },
             { path: 'form-controls', loadChildren: './pages/form-controls/form-controls.module#FormControlsModule', data: { breadcrumb: 'Form Controls' } },

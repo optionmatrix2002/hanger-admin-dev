@@ -6,5 +6,6 @@ export class Menu {
                 public icon: string,
                 public target: string,
                 public hasSubMenu: boolean,
+                public color: string,
                 public parentId: number) { }
 }  

@@ -52,14 +52,19 @@ import { VocabComponent } from './pages/vocab/vocab.component';
 import { ViolationsComponent } from './pages/violations/violations.component';
 import { IPComponent } from './pages/ip/ip.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
+import { LookupComponent } from './pages/lookup/lookup.component';
 import { ItemsComponent } from './pages/items/items.component';
 import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 
 @NgModule({
   
   imports: [
     NgxMatDrpModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger' // set defaults here
+    }),
     BrowserModule,
     BrowserAnimationsModule,     
     FormsModule, 
@@ -82,6 +87,7 @@ import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
   ],
   declarations: [
     NotificationsComponent,
+    LookupComponent,
     IPComponent,
     ViolationsComponent,
     VocabComponent,
@@ -115,7 +121,7 @@ import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
     
   ],
   entryComponents:[
-    VerticalMenuComponent
+    VerticalMenuComponent,
   ],
   providers: [ 
     AppSettings,
