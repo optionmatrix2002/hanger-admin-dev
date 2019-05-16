@@ -1,0 +1,81 @@
+.no-padding{
+    padding: 0;
+    margin: 0;
+}
+
+.close{
+    float: right;
+    color: black;
+}
+
+.radio-inline{
+    margin-left: 15px;
+}
+
+.margin-top{
+    margin-top: 10px;
+}
+
+
+// .textleft{
+//     text-align: left !important;
+// }
+
+
+
+  
+
+  //For Permissions modal dailog
+  @media (min-width: 768px){
+  .modal-custom{
+        width: 800px !important;
+        margin: 30px auto;
+  }
+}
+
+
+.disablerow{
+    cursor: not-allowed !important;
+    pointer-events:none !important;
+    background-color: #79747457 !important;
+    border: 1px solid #ddd !important;
+  }
+
+.close{
+    float: right;
+    color: black;
+}
+
+.radio-inline{
+    margin-left: 15px;
+}
+
+
+  //For Permissions modal dailog
+  @media (min-width: 768px){
+  .modal-custom{
+        width: 800px !important;
+        margin: 30px auto;
+  }
+}
+
+::ng-deep .mat-pseudo-checkbox-checked::after {
+    top: 2.4px;
+    left: 1px;
+    width: 8px;
+    height: 3px;
+    border-left: 2px solid currentColor;
+    transform: rotate(-45deg);
+    opacity: 1;
+    box-sizing: content-box;
+}
+
+::ng-deep .app.indigo-light .mat-pseudo-checkbox-checked, .app.indigo-light .mat-pseudo-checkbox-indeterminate, .app.indigo-light .mat-accent .mat-pseudo-checkbox-checked, .app.indigo-light .mat-accent .mat-pseudo-checkbox-indeterminate {
+  background: #1b8ef1 !important;
+}
+
+
+.removeborder:hover{
+    background-color: #fafafa !important;
+}
+

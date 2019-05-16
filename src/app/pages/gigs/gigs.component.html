@@ -1,0 +1,384 @@
+<div class="col-sm-12">
+    <div class="row">
+        <div class="col-md-3 col-sm-12 pull-left">
+            <div id="Quality_table1_filter" class="dataTables_filter pull-left"><label style="display:inline-block; font-weight: 400">Keyword :&nbsp;</label>
+                <input type="search" placeholder="Search By Keyword" class="form-control input-medium input-inline" aria-controls="Quality_table1">
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 pull-left">
+            <ngx-mat-drp [options]="options" #dateRangePicker></ngx-mat-drp>
+        </div>
+        <div class="col-md-2 col-sm-12 pull-left">
+            <a style="margin-left:-70px" class="btn btn-primary">
+                <i class="fa fa-search"></i>&nbsp;Filter
+            </a>
+        </div>
+    </div>
+
+
+    <table class="table table-hover table-bordered table-scrollable-borderless table-striped margin-top" id="table1">
+        <thead>
+            <tr>
+                <th>
+                    Member Name
+                </th>
+                <th>
+                    Gig Name
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    Status
+                </th>
+                <!-- <th class="text-center">
+                    Actions
+                </th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let data of users'>
+                <td>{{data.owner}}</td>
+                <td><a (click)="addUserModalToggle(1)"> {{data.name}} </a> </td>
+                <td>{{data.type}} </td>
+                <td style="width:30%">{{data.description}} </td>
+                <td>12<sup>th</sup> May 2019 </td>
+                <td>
+                    <!-- <a *ngIf="status==null" (click)='getstatus(1)'>Active</a>
+          <a *ngIf="status==1">Inactive</a> -->
+                    <a (click)="changeStatus($event,data.Id)">{{ data.status ? '&nbsp;&nbsp;&nbsp;Active'
+                        :'Inactive'}}
+                    </a>
+                </td>
+                <!-- <td class="text-center">
+                    <a title="Click to Update details">
+                        <i (click)="addUserModalToggle(1)" class="fa fa-pencil-square"></i>
+                    </a>&nbsp;
+                    <a title="Click to Delete">
+                        <i (click)="deleteModalToggle(1)" class="fa fa-trash" style="color:red"></i>
+                    </a>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" bsModal #addUserModal="bs-modal" [config]="{backdrop: 'static'}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <b>Gig Details</b> <i (click)="addUserModalToggle(2)" class="fa fa-times pull-right" style="font-size:17px;"></i>
+                </h4>
+            </div>
+            <div class="modal-body col-md-12">
+                <form (ngSubmit)="onSubmit()" #heroForm="ngForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Member Name&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                Yiorgos Avraamu
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Gig Name&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                GUCCI Personal Assistant to a Connector
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Description&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                To drive sales through creating a unique, innovative and inspirational customer experience encompassing the Free People lifestyle and brand image, resulting in positive customer relationships and a profitable store. Meet or exceed personal Sales Goal in order to help the store achieve its sales goals.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Gig Posted Date&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                12<sup>th</sup> May 2019
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Gig Type&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                Part-Time
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="button" class="btn btn-default" (click)="addUserModalToggle(2)">Close</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" bsModal #deleteModal="bs-modal" [config]="{backdrop: 'static'}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <b>Delete Record</b> <i (click)="deleteModalToggle(2)" class="fa fa-times pull-right" style="font-size:17px;"></i>
+                </h4>
+            </div>
+            <div class="modal-body col-md-12">
+
+                <div class="col-sm-12">
+                    <label>Are You Sure ? You want to delete record, this action can't be undone.</label>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger"><i class="fa fa-check"></i>&nbsp;Delete</button>
+                <button type="button" class="btn btn-default" (click)="deleteModalToggle(2)"><i class="fa fa-times"></i>&nbsp;Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" bsModal #permissionModal="bs-modal" [config]="{backdrop: 'static'}" role="dialog">
+    <div class="modal-dialog modal-custom">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <b>Permissions</b> <i (click)="permissionModalToggle(2)" class="fa fa-times pull-right" style="font-size:17px;"></i>
+                </h4>
+            </div>
+            <div class="modal-body row">
+                <div class="col-sm-12">
+                    <table class="table table-hover table-bordered table-scrollable-borderless col-sm-6 table-striped margin-top"
+                        id="table1">
+                        <thead>
+
+                            <tr>
+                                <th>
+                                    Select
+                                </th>
+                                <th>
+                                    Permission
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <mat-checkbox [checked]= "true"></mat-checkbox>
+                                </td>
+                                <td class="textleft">View Dashboard</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-checkbox [checked]= "true"></mat-checkbox>
+                                </td>
+                                <td class="textleft">Manage Users</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-checkbox></mat-checkbox>
+                                </td>
+                                <td class="textleft">Manage Events</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-checkbox></mat-checkbox>
+                                </td>
+                                <td class="textleft">Manage Items</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-checkbox></mat-checkbox>
+                                </td>
+                                <td class="textleft">Manage Messages</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-checkbox></mat-checkbox>
+                                </td>
+                                <td class="textleft">Manage Posts</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-checkbox></mat-checkbox>
+                                </td>
+                                <td class="textleft">Manage Badges</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-checkbox></mat-checkbox>
+                                </td>
+                                <td class="textleft">Assign Permissions</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" (click)="permissionModalToggle(2)" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;Update</button>
+                <button type="button" class="btn btn-default" (click)="permissionModalToggle(2)"><i class="fa fa-arrow-left"></i>&nbsp;Go
+                    Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" bsModal #permissionModal1="bs-modal" [config]="{backdrop: 'static'}" role="dialog">
+        <div class="modal-dialog modal-custom">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <b>Permissions</b> <i (click)="permissionModal1Toggle(2)" class="fa fa-times pull-right" style="font-size:17px;"></i>
+                    </h4>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-sm-12">
+                        <table class="table table-hover table-bordered table-scrollable-borderless col-sm-6 table-striped margin-top"
+                            id="table1">
+                            <thead>
+    
+                                <tr>
+                                    <th>
+                                        Select
+                                    </th>
+                                    <th>
+                                        Permission
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td>
+                                            <mat-checkbox [checked]= "true"></mat-checkbox>
+                                        </td>
+                                        <td class="textleft">View Dashboard</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <mat-checkbox [checked]= "true"></mat-checkbox>
+                                        </td>
+                                        <td class="textleft">Manage Users</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <mat-checkbox></mat-checkbox>
+                                        </td>
+                                        <td class="textleft">Manage Events</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <mat-checkbox></mat-checkbox>
+                                        </td>
+                                        <td class="textleft">Manage Items</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <mat-checkbox></mat-checkbox>
+                                        </td>
+                                        <td class="textleft">Manage Messages</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <mat-checkbox></mat-checkbox>
+                                        </td>
+                                        <td class="textleft">Manage Posts</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <mat-checkbox></mat-checkbox>
+                                        </td>
+                                        <td class="textleft">Manage Badges</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <mat-checkbox></mat-checkbox>
+                                        </td>
+                                        <td class="textleft">Assign Permissions</td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                    </div>
+    
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" (click)="permissionModal1Toggle(2)" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;Update</button>
+                    <button type="button" class="btn btn-default" (click)="permissionModal1Toggle(2)"><i class="fa fa-times"></i>&nbsp;Close
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- For Entities List Modal Popup -->
+<div class="modal fade" bsModal #entitiesModal="bs-modal" [config]="{backdrop: 'static'}" role="dialog">
+  
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title titlemodal">
+                    <b>Assign Entity</b> <i (click)="assignEntityToggle(2)" class="fa fa-times pull-right titlemodal"></i>
+                </h4>
+            </div>
+            <div class="modal-body modalbody col-sm-12">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Division&nbsp;:</label>
+                            <div class="col-md-8">
+                                <mat-select placeholder="Division" class="col-sm-10 form-control marginbtn" multiple>
+                                    <mat-option> Project  </mat-option>
+                                    <mat-option> Product  </mat-option>
+                                </mat-select>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Location&nbsp;:</label>
+                            <div class="col-md-8">
+                                <mat-select placeholder="Location" class="col-sm-10 form-control marginbtn" multiple>
+                                    <mat-option> India  </mat-option>
+                                    <mat-option> Australia </mat-option>
+                                    <mat-option> Canada  </mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Entity&nbsp;:</label>
+                            <div class="col-md-8">
+                                <mat-select placeholder="Entity" class="col-sm-10 form-control marginbtn" multiple>
+                                    <mat-option> Option Matrix  </mat-option>
+                                    <mat-option> Option M  </mat-option>
+                                    <mat-option> Option Zero  </mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" (click)="assignEntityToggle(2)"><i class="fa fa-check"></i>&nbsp;Save</button>
+        
+            <button type="button" class="btn btn-default" (click)="assignEntityToggle(2)"><i class="fa fa-times"></i>&nbsp;Close
+            </button>
+            <button type="button" (click)="assignEntityToggle(2)" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp;Unassign Entities</button>
+        </div>
+        </div>
+    </div>
+</div>
+

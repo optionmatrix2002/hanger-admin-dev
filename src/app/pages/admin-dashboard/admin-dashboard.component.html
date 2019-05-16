@@ -1,0 +1,88 @@
+
+<div class="col-sm-12">
+   <div class="row">
+       <div class="col-md-12">
+            <ngx-mat-drp style="float:right;" [options]="options" #dateRangePicker></ngx-mat-drp>
+       </div>
+   </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat red-intense">
+                <div class="visual">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        852
+                    </div>
+                    <div class="desc">
+                        Total Active Members
+                    </div>
+                </div>
+                <!-- <a class="more">
+                    View more <i class="fa fa-arrow-circle-right white pull-right"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat blue-madison">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        535
+                    </div>
+                    <div class="desc">
+                        Total Projects
+                    </div>
+                </div>
+                <!-- <a class="more">
+                    View more <i class="fa fa-arrow-circle-right white pull-right"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat green-haze">
+                <div class="visual">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        2500
+                    </div>
+                    <div class="desc">
+                        Total Posts
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat purple-plum">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        600
+                    </div>
+                    <div class="desc">
+                        Total Gigs
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div [chart]="exceptionschart" class="col-sm-6 charts"></div>
+        <div [chart]="dimensionsummarychart" class="col-sm-6 charts"></div>
+        <div [chart]="krasummarychart" class="col-sm-6 charts"></div>
+        <div [chart]="kpisummarychart" class="col-sm-6 charts"></div>
+    </div>
+
+    
+
+
+</div>

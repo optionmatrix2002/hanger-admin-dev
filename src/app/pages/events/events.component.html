@@ -1,0 +1,198 @@
+<div class="col-sm-12">
+    <!-- <div class="col-sm-12 no-padding" style="margin-bottom:10px;margin-right: 0px;">
+        <a class="btn btn-primary pull-right IECustombtn" style="margin-left: 10px;" (click)="filter = !filter">
+            <i class="fa fa-filter"></i>&nbsp;Filter
+        </a>
+        <a class="btn btn-primary pull-right IECustombtn" (click)="addUserModalToggle(1)" title="Click to Add New Event">
+            <i class="fa fa-plus"></i>&nbsp;Add Event
+        </a>
+    </div> -->
+    <div class="row">
+        <div class="col-md-3 col-sm-12 pull-left">
+            <div id="Quality_table1_filter" class="dataTables_filter pull-left"><label style="display:inline-block; font-weight: 400">Keyword :&nbsp;</label>
+                <input type="search" placeholder="Search By Keyword" class="form-control input-medium input-inline" aria-controls="Quality_table1">
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 pull-left">
+            <ngx-mat-drp [options]="options" #dateRangePicker></ngx-mat-drp>
+        </div>
+        <div class="col-md-2 col-sm-12 pull-left">
+            <a style="margin-left:-70px" class="btn btn-primary">
+                <i class="fa fa-search"></i>&nbsp;Filter
+            </a>
+        </div>
+    </div>
+
+
+    <table class="table table-hover table-bordered table-scrollable-borderless table-striped margin-top" id="table1">
+        <thead>
+            <tr>
+                <th>
+                    Member Name
+                </th>
+                <th>
+                    Event Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Event Date
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Visibility
+                </th>
+                <th>Capacity</th>
+                <th>Tickets</th>
+                <th>
+                    Status
+                </th>
+                <!-- <th class="text-center">
+                    Actions
+                </th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let data of users'>
+                <td>{{data.user_name}} </td>
+                <td><a (click)="addUserModalToggle(1)"> {{data.name}} </a> </td>
+                <td>{{data.description}} </td>
+                <td>12<sup>th</sup> May 2019 </td>
+                <td>{{data.location}} </td>
+                <td *ngIf="data.visibility == 'Public'"  style="color:green">{{data.visibility}} </td>
+                <td *ngIf="data.visibility == 'Private'"  style="color:red">{{data.visibility}} </td>
+                <td>{{data.capacity}} </td>
+                <td *ngIf="data.tickets == 'Free'" style="color:green"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;{{data.tickets}}</td>
+                <td *ngIf="data.tickets == 'Paid'" style="color:red"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;{{data.tickets}}</td>
+                <td>
+                    <!-- <a *ngIf="status==null" (click)='getstatus(1)'>Active</a>
+          <a *ngIf="status==1">Inactive</a> -->
+                    <a (click)="changeStatus($event,data.Id)">{{ data.status ? '&nbsp;&nbsp;&nbsp;Active'
+                        :'Inactive'}}
+                    </a>
+                </td>
+                <!-- <td class="text-center">
+                    <a title="Click to Update details">
+                        <i (click)="addUserModalToggle(1)" class="fa fa-pencil-square"></i>
+                    </a>&nbsp;
+                    <a title="Click to Delete">
+                        <i (click)="deleteModalToggle(1)" class="fa fa-trash" style="color:red"></i>
+                    </a>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" bsModal #addUserModal="bs-modal" [config]="{backdrop: 'static'}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <b>Event Details</b> <i (click)="addUserModalToggle(2)" class="fa fa-times pull-right" style="font-size:17px;"></i>
+                </h4>
+            </div>
+            <div class="modal-body col-md-12">
+                <form (ngSubmit)="onSubmit()" #heroForm="ngForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Member Name&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                Yiorgos Avraamu
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Event Name&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                Boutique Event
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Event Date&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                12<sup>th</sup> May 2019 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Description&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                Sells women's clothing, purses and shoes.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Location&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                Canada
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Visibility&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                Public
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Capacity&nbsp;:</b></label>
+                        <div class="col-md-8" style="margin-top: 8px;">
+                            1000
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><b>Ticket Type&nbsp;:</b></label>
+                        <div class="col-md-8">
+                            <div class="input-icon right" style="margin-top: 8px;">
+                                Free
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="button" class="btn btn-default" (click)="addUserModalToggle(2)">Close</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" bsModal #deleteModal="bs-modal" [config]="{backdrop: 'static'}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <b>Delete Record</b> <i (click)="deleteModalToggle(2)" class="fa fa-times pull-right" style="font-size:17px;"></i>
+                </h4>
+            </div>
+            <div class="modal-body col-md-12">
+
+                <div class="col-sm-12">
+                    <label>Are You Sure ? You want to delete record, this action can't be undone.</label>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger"><i class="fa fa-check"></i>&nbsp;Delete</button>
+                <button type="button" class="btn btn-default" (click)="deleteModalToggle(2)"><i class="fa fa-times"></i>&nbsp;Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
