@@ -1,7 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AppSettings } from '../../app.settings';
 import { Settings } from 'src/app/app.settings.model';
 import { ModalDirective } from 'ngx-bootstrap';
+import { LookupService } from './lookup.service';
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-lookup',
@@ -16,6 +19,8 @@ export class LookupComponent implements OnInit {
   myModel = true;
   disabled = true;
   code_master:any;
+  codeTypes= [{"id":1,"title":"User Type"}, {"id":2,"title":"Industry"}];
+  addLookUpForm:FormGroup;
 
 
   
@@ -25,7 +30,16 @@ export class LookupComponent implements OnInit {
   @ViewChild('permissionModal1') public permissionModal1: ModalDirective;
   @ViewChild('entitiesModal') public entitiesModal: ModalDirective;
 
-  
+  getLookups(filters) {
+    this.lookupService.getLookups(filters).then(data => {
+      if(data.success) {
+        console.log(data.results);
+      }
+      else {
+        console.log(data.message);
+      }
+    })
+  }
   
 
   onSubmit(){
@@ -111,7 +125,19 @@ this.status=e;
     document.getElementById("repeat-" + e).remove();
   }
 
-  constructor(public appSettings:AppSettings) { 
+  createLookUpForm() {
+    this.addLookUpForm = this.fb.group({
+      addLookUpName:this.fb.array([]),
+      code:new FormControl('',[Validators.required])
+    });
+  }
+
+  get code() { return this.addLookUpForm.get('code'); }
+
+  get addLookUpName() { return this.addLookUpForm.get('addLookUpName') as FormArray; };
+
+  constructor(public appSettings:AppSettings, public lookupService: LookupService,private fb:FormBuilder) { 
+    this.createLookUpForm();
     this.settings = this.appSettings.settings; 
     this.users = [
       { Id: 1, code: 'Industry', lookup:"Mining", status:'Active',criteria2: '150',  criteria3: '150'},
@@ -122,6 +148,84 @@ this.status=e;
   }
 
   ngOnInit() {
+    this.getLookups({});
+  }
+
+  checkAddRow() {
+    var flag = 0;
+    var form = this.addLookUpForm;
+    var key1 = 'addLookUpName';
+    var i = (form.get(key1) as FormArray).controls.length;
+    for (var k = 0; k < i; k++) {
+      var chkCond1 = (form.get(key1) as FormArray).controls[k].value;
+      if (!chkCond1) {
+        flag++;
+      }
+      if (k + 1 == i) {
+        if (flag == 0) {
+          this.AddEmptyRow();
+        } else {
+          //this.alertService.createAlert('Please fill all lookup names fields before adding new one.', 0);
+        }
+      }
+    }
+  }
+
+  AddRowWithData(value) {
+    var form = this.addLookUpForm;
+    var key1 = 'addLookUpName';
+    (form.get(key1) as FormArray).push(new FormControl(value, [Validators.required, this.noWhiteSpaceValidator]));
+  }
+
+  AddEmptyRow() {
+    var form = this.addLookUpForm;
+    var key1 = 'addLookUpName';
+    (form.get(key1) as FormArray).push(new FormControl('', [Validators.required, this.noWhiteSpaceValidator]));
+  }
+
+  removeObject(i) {
+    this.addLookUpName.removeAt(i);
+  }
+
+  saveLookups() {
+    // if(this.lookupObj) {
+    //   let detail = {"lookup_id": this.lookupObj.lookup_id, "lookup_name": this.addLookUpName.controls[0].value}
+    //   this.adminService.updateLookup(detail).then(data => {
+    //     if(data.success) {
+    //       this.alertService.createAlert("Lookups updated successfully" , 1);
+    //       this.dialogRef.close('save');
+    //     }
+    //     else {
+    //       this.alertService.createAlert(data.message , 0);
+    //     }
+    //   });
+    // } 
+      let tempArray = [];
+      let temp = {};
+      temp["code_master_id"] =  this.addLookUpForm.value.code;
+      for( let i=0; i< this.addLookUpName.length; i++) {
+        tempArray.push(this.addLookUpName.controls[i].value);
+      }
+      temp["lookup_names"] =  tempArray;
+      this.lookupService.addLookup(temp)
+      .then(data => {
+        if(data.success) {
+          console.log("success");
+          //this.alertService.createAlert("Lookups saved successfully" , 1);
+          //this.dialogRef.close('save');
+        }
+        else {
+          console.log("Failed to add lookup");
+          // this.alertService.createAlert(data.message , 0);
+        }
+      });
+    
+  }
+
+  noWhiteSpaceValidator(control : FormControl) {
+    let isWhiteSpace = (control.value || '').trim().length === 0;
+    let isValid = !isWhiteSpace;
+    return isValid ? null : {'whitespace':true};
   }
 
 }
