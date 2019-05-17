@@ -1,12 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AppSettings } from '../../../app.settings';
 import { Settings } from 'src/app/app.settings.model';
 import { ModalDirective } from 'ngx-bootstrap';
+import { MatDialog } from '@angular/material';
+import { AlertService } from '../../../shared/alert.service';
+import {PageEvent} from '@angular/material';
+import { PagesService } from '../../pages.service';
+import { AddBadgeDialogComponent } from './add-badge-dialog/add-badge-dialog.component';
 
 @Component({
   selector: 'app-badges',
   templateUrl: './badges.component.html',
-  styleUrls: ['./badges.component.scss']
+  styleUrls: ['./badges.component.scss'],encapsulation: ViewEncapsulation.None,
 })
 export class BadgesComponent implements OnInit {
 
@@ -15,6 +20,11 @@ export class BadgesComponent implements OnInit {
   status: boolean;
   myModel = true;
   disabled = true;
+  public popoverTitle: string = 'Confirm Delete';
+  public popoverMessage: string = 'Are you sure you want to delete this.?';
+  public popoverStatusTitle: string = 'Confirm Status Change';
+  public popoverStatusMessage: string = 'Are you sure you want to change status.?';
+  public cancelClicked: boolean = false;
 
 
   
@@ -25,7 +35,20 @@ export class BadgesComponent implements OnInit {
   @ViewChild('entitiesModal') public entitiesModal: ModalDirective;
 
   
-  
+  public updateBadgeDialog(badge) {
+    let dialogRef = this.dialog.open(AddBadgeDialogComponent, {
+        data: badge,
+        height: 'auto',
+        width: '600px',
+        autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      console.log(data);
+      if(data == 'save') {
+        //this.getLookupOptions();
+      }
+    });
+  }
 
   onSubmit(){
 
@@ -93,7 +116,7 @@ this.status=e;
 
   }
 
-  constructor(public appSettings:AppSettings) 
+  constructor(public appSettings:AppSettings,public dialog: MatDialog) 
   {
     this.settings = this.appSettings.settings; 
     this.users = [

@@ -1,6 +1,7 @@
 import { Component, ViewChild} from '@angular/core';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
+import { ToasterModule, ToasterService, ToasterConfig } from 'angular2-toaster';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,21 @@ import { Settings } from './app.settings.model';
 })
 export class AppComponent {
   public settings: Settings;
-  constructor(public appSettings:AppSettings){
+  private toasterService: ToasterService;
+  constructor(public appSettings:AppSettings, toasterService: ToasterService){
+    this.toasterService = toasterService;
       this.settings = this.appSettings.settings;
   } 
+
+  public config: ToasterConfig =
+    new ToasterConfig({
+      showCloseButton: false,
+      limit: 1,
+      tapToDismiss: true,
+      timeout: 2000,
+      positionClass: 'toast-top-right',
+      animation: 'fade'
+    });
 
   ngOnInit() { }
 }

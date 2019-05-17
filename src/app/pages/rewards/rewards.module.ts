@@ -5,6 +5,8 @@ import { BadgesComponent } from './badges/badges.component';
 import { RouterModule } from '@angular/router';
 import { ModalModule } from "ngx-bootstrap";
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { AddBadgeDialogComponent } from './badges/add-badge-dialog/add-badge-dialog.component';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 export const routes = [
   { path: '', redirectTo: 'badges', pathMatch: 'full' },
@@ -13,12 +15,19 @@ export const routes = [
 ];
 
 @NgModule({
-  declarations: [CoinsComponent, BadgesComponent],
+  entryComponents : [AddBadgeDialogComponent],
+  declarations: [CoinsComponent, BadgesComponent, AddBadgeDialogComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
     CommonModule,FormsModule,ReactiveFormsModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger' // set defaults here
+    }),
     ModalModule.forRoot(),
     RouterModule.forChild(routes),
-  ]
+  ],
+  
 })
 export class RewardsModule { }

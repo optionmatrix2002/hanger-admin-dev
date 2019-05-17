@@ -32,6 +32,7 @@
     "angular-highcharts": "^7.0.2",
     "angular-in-memory-web-api": "0.6.1",
     "angular-mgl-timeline": "^0.2.2",
+    "angular2-toaster": "^7.0.0",
     "bootstrap": "^3.3.7",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.7",

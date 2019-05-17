@@ -9,6 +9,7 @@
 @import "app/theme/styles/theme";
 @import "app/theme/styles/libs-override";
 @import "app/theme/styles/rtl";
+@import 'node_modules/angular2-toaster/src/toaster';
 
 
 
@@ -57,6 +58,16 @@ background-color: #606389;
 
 .red {
     color: red !important;
+}
+
+.add-member-label::after {
+  content: '*';
+  color: red;
+}
+
+.btn-success {
+  background: #229494 !important;
+  color: white !important;
 }
 
 //Styles End here for tree

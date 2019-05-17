@@ -53,9 +53,11 @@ import { ViolationsComponent } from './pages/violations/violations.component';
 import { IPComponent } from './pages/ip/ip.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { LookupComponent } from './pages/lookup/lookup.component';
+import { AddLookupDialogComponent } from './pages/lookup/add-lookup-dialog/add-lookup-dialog.component'
 import { ItemsComponent } from './pages/items/items.component';
 import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ToasterModule } from 'angular2-toaster';
 
 
 @NgModule({
@@ -66,6 +68,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
       confirmButtonType: 'danger' // set defaults here
     }),
     BrowserModule,
+    ToasterModule.forRoot(),
     HttpModule,
     BrowserAnimationsModule,     
     FormsModule, 
@@ -89,6 +92,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
   declarations: [
     NotificationsComponent,
     LookupComponent,
+    AddLookupDialogComponent,
     IPComponent,
     ViolationsComponent,
     VocabComponent,
@@ -123,6 +127,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
   ],
   entryComponents:[
     VerticalMenuComponent,
+    AddLookupDialogComponent
   ],
   providers: [ 
     AppSettings,
