@@ -58,6 +58,8 @@ import { ItemsComponent } from './pages/items/items.component';
 import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { ToasterModule } from 'angular2-toaster';
+import { ModerateusersComponent } from './pages/moderateusers/moderateusers.component';
+import { AddUserDialogComponent } from './pages/moderateusers/add-user-dialog/add-user-dialog.component';
 
 
 @NgModule({
@@ -120,6 +122,8 @@ import { ToasterModule } from 'angular2-toaster';
     UserMenuComponent,
     AdminDashboardComponent,
     FooterComponent,
+    ModerateusersComponent,
+    AddUserDialogComponent,
     
     
     
@@ -127,7 +131,8 @@ import { ToasterModule } from 'angular2-toaster';
   ],
   entryComponents:[
     VerticalMenuComponent,
-    AddLookupDialogComponent
+    AddLookupDialogComponent,
+    AddUserDialogComponent
   ],
   providers: [ 
     AppSettings,

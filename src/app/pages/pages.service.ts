@@ -21,6 +21,8 @@ export class PagesService {
   updatelookupurl = 'http://localhost:6500/updatelookup';
   getbadgesurl = 'http://localhost:6500/getbadges';
   updatebadgesurl = 'http://localhost:6500/updatebadge';
+  getallusersurl = 'http://localhost:6500/getallusers';
+  updateuserstatusurl = 'http://localhost:6500/updateuserstatus';
 
   getToken() {
     if (localStorage.getItem('login_user_info')) {
@@ -86,6 +88,17 @@ export class PagesService {
     .catch(this.handleErrorPromise);
   }
 
+  updateUserStatus(filter) : Promise <any> {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.getToken()
+    });
+    return this.http.put(this.updateuserstatusurl, JSON.stringify(filter),{headers:this.headers, withCredentials: true}).toPromise()
+    .then(this.extractData)
+    .catch(this.handleErrorPromise);
+  }
+
   updateLookup(item) : Promise<any> {
     this.headers = new Headers({
       'Content-Type': 'application/json',
@@ -93,6 +106,17 @@ export class PagesService {
       'Authorization': 'Bearer ' + this.getToken()
     });
     return this.http.put(this.updatelookupurl, JSON.stringify(item), {headers:this.headers, withCredentials:true}).toPromise()
+    .then(this.extractData)
+    .catch(this.handleErrorPromise);
+  }
+
+  getAllUsers(filter) : Promise<any> {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.getToken(),
+    });
+    return this.http.post(this.getallusersurl, JSON.stringify(filter), {headers:this.headers, withCredentials:true}).toPromise()
     .then(this.extractData)
     .catch(this.handleErrorPromise);
   }

@@ -18,6 +18,7 @@ import { BlankComponent } from './pages/blank/blank.component';
 import { SearchComponent } from './pages/search/search.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ErrorComponent } from './pages/errors/error/error.component';
+import { ModerateusersComponent } from './pages/moderateusers/moderateusers.component';
 
 export const routes: Routes = [
     {path:'', redirectTo:'login', pathMatch:'full'},
@@ -38,6 +39,7 @@ export const routes: Routes = [
             { path: 'items', component: ItemsComponent, data: { breadcrumb: 'Items', helptext:{heading:'Items', text:'This page is used to manage Items'} } },
             { path: 'notifications', component: NotificationsComponent, data: { breadcrumb: 'Notifications', helptext:{heading:'Notifications', text:'This page is used to manage notification settings.'} } },
             { path: 'lookups', component: LookupComponent, data: { breadcrumb: 'Lookups', helptext:{heading:'Lookups', text:'This page is used to manage lookups.'} } },
+            { path: 'users', component: ModerateusersComponent, data: { breadcrumb: 'Members', helptext:{heading:'Members', text:'This page is used to manage lookups.'} } },
             /* { path: 'users', loadChildren: './pages/users/users.module#UsersModule', data: { breadcrumb: 'Users' } }, */
             /* { path: 'ui', loadChildren: './pages/ui/ui.module#UiModule', data: { breadcrumb: 'UI' } },
             { path: 'form-controls', loadChildren: './pages/form-controls/form-controls.module#FormControlsModule', data: { breadcrumb: 'Form Controls' } },
@@ -60,7 +62,7 @@ export const routes: Routes = [
             { path: 'dynamic-menu', loadChildren: './pages/dynamic-menu/dynamic-menu.module#DynamicMenuModule', data: { breadcrumb: 'Dynamic Menu' }  },          
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },*/
-            {path:'users', loadChildren:'./pages/admin-settings/admin-settings.module#AdminSettingsModule'}
+            //{path:'users', loadChildren:'./pages/admin-settings/admin-settings.module#AdminSettingsModule'}
         ]
     },
     { path: 'landing', loadChildren: './pages/landing/landing.module#LandingModule' },

@@ -112,7 +112,7 @@ export const horizontalMenuItems = [
     //new Menu (15, 'Prohibited Vocabulary', '/vocab', null, 'thumb_down', null, true, 13),
     //new Menu (16, 'IP Access', '/ip', null, 'rss_feed', null, true, 13),
     //new Menu (17, 'Notifications', '/notifications', null, 'notification_important', null, true, 13),
-    new Menu (4, 'Moderate Members', '/users/normalusers', null, 'group', null, true,"white", 0),
+    new Menu (4, 'Moderate Members', '/users', null, 'group', null, true,"white", 0),
     //new Menu (8, 'Staff Users', '/users/staffusers', null, 'people_outline', null, false, 12), 
     //new Menu (5, 'Events', '/events', null, 'event', null, false, 3), 
     new Menu (6, 'Announcements ', '/announcements', null, 'announcement', null, false,"red", 0),
