@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angula
 import { AddLookupDialogComponent } from './add-lookup-dialog/add-lookup-dialog.component';
 import { MatDialog } from '@angular/material';
 import { AlertService } from '../../shared/alert.service';
-import {PageEvent} from '@angular/material';
+import { PageEvent } from '@angular/material';
 import { PagesService } from '../pages.service';
 
 @Component({

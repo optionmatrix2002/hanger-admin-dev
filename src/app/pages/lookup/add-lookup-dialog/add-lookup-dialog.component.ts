@@ -13,7 +13,7 @@ import { PagesService } from '../../pages.service';
 export class AddLookupDialogComponent implements OnInit {
 
   addLookUpForm:FormGroup;
-  codeTypes= [{"id":1,"title":"User Type"}, {"id":2,"title":"Industry"}];
+  codeTypes= [{"id":1,"title":"Work Designation"}, {"id":2,"title":"Account Purpose"}];
   
   constructor(public alertService: AlertService,public pagesService: PagesService,public dialogRef: MatDialogRef<AddLookupDialogComponent>,@Inject(MAT_DIALOG_DATA) public lookupObj: any,
     private fb:FormBuilder) { 

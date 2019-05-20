@@ -1,0 +1,47 @@
+<!--This page is used to add or edit a lookup-->
+<h1 style="background-color: #606389" mat-dialog-title> {{ badge ? "Update Badge": "Add Badge"   }} </h1><hr>
+<div mat-dialog-content>
+
+    <form class="form-horizontal" novalidate [formGroup]="addBadgeForm">
+        <div class="form-group">
+            <label class="control-label col-sm-4 add-member-label" for="badge">Badge Name : </label>
+            <div class="col-sm-8">
+                <input type="text" maxlength="60" disabled class="form-control" maxlength="60" formControlName="badgeName" required id="email" placeholder="Enter Badge Name"> 
+                <div *ngIf="!badgeName.valid && (badgeName.dirty || badgeName.touched)" class="error-text">
+                        Badge Name is required.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4 add-member-label" for="coins">Minimum Coins : </label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" maxlength="5" maxlength="60" formControlName="minimumCoins" required id="email" placeholder="Enter minimum number of coins"> 
+              <div *ngIf="!minimumCoins.valid && (minimumCoins.dirty || minimumCoins.touched)" class="error-text">
+                      Minimum number of coins are required.
+              </div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4 add-member-label" for="coins">Minimum Connections : </label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" maxlength="5" formControlName="minimumConnections" required id="email" placeholder="Enter minimum number of connections"> 
+              <div *ngIf="!minimumConnections.valid && (minimumConnections.dirty || minimumConnections.touched)" class="error-text">
+                      Minimum number of connections are required.
+              </div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4 add-member-label" for="coins">Minimum Posts : </label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" maxlength="5" formControlName="minimumPosts" required id="email" placeholder="Enter minimum number of posts"> 
+              <div *ngIf="!minimumPosts.valid && (minimumPosts.dirty || minimumPosts.touched)" class="error-text">
+                      Minimum number of posts are required.
+              </div>
+            </div>
+        </div>
+    </form>
+</div>
+<mat-dialog-actions align="end">
+    <button mat-raised-button [disabled]="!addBadgeForm.valid" [ngClass]="!addBadgeForm.valid ? '': 'btn-success'  " (click)="saveBadge()">{{ badge ? "Update": "Save"   }}</button>
+    <button mat-raised-button class="add-dark-hover btn-default" (click)="close()">Cancel</button>
+</mat-dialog-actions> 

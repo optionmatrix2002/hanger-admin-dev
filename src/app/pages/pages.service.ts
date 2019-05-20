@@ -19,6 +19,8 @@ export class PagesService {
   logouturl = 'http://localhost:6500/logout';
   getlookupoptionsurl = 'http://localhost:6500/getlookupoptions';
   updatelookupurl = 'http://localhost:6500/updatelookup';
+  getbadgesurl = 'http://localhost:6500/getbadges';
+  updatebadgesurl = 'http://localhost:6500/updatebadge';
 
   getToken() {
     if (localStorage.getItem('login_user_info')) {
@@ -58,6 +60,28 @@ export class PagesService {
       'Authorization': 'Bearer ' + this.getToken()
     });
     return this.http.post(this.getlookupoptionsurl, JSON.stringify(filter),{headers:this.headers, withCredentials: true}).toPromise()
+    .then(this.extractData)
+    .catch(this.handleErrorPromise);
+  }
+
+  getBadges(filter) : Promise <any> {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.getToken()
+    });
+    return this.http.post(this.getbadgesurl, JSON.stringify(filter),{headers:this.headers, withCredentials: true}).toPromise()
+    .then(this.extractData)
+    .catch(this.handleErrorPromise);
+  }
+
+  updateBadge(filter) : Promise <any> {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.getToken()
+    });
+    return this.http.put(this.updatebadgesurl, JSON.stringify(filter),{headers:this.headers, withCredentials: true}).toPromise()
     .then(this.extractData)
     .catch(this.handleErrorPromise);
   }

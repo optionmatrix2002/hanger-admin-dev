@@ -1,135 +1,79 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { AppSettings } from '../../../app.settings';
-import { Settings } from 'src/app/app.settings.model';
-import { ModalDirective } from 'ngx-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { AddBadgeDialodComponent } from './add-badge-dialod/add-badge-dialod.component';
 import { MatDialog } from '@angular/material';
-import { AlertService } from '../../../shared/alert.service';
-import {PageEvent} from '@angular/material';
 import { PagesService } from '../../pages.service';
-import { AddBadgeDialogComponent } from './add-badge-dialog/add-badge-dialog.component';
+import { AlertService } from '../../../shared/alert.service';
 
 @Component({
   selector: 'app-badges',
   templateUrl: './badges.component.html',
-  styleUrls: ['./badges.component.scss'],encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./badges.component.scss']
 })
 export class BadgesComponent implements OnInit {
-
-  public users: any;
-  public settings: Settings;
-  status: boolean;
-  myModel = true;
-  disabled = true;
+  tableList: any;
+  showEmpty : boolean = true;
   public popoverTitle: string = 'Confirm Delete';
   public popoverMessage: string = 'Are you sure you want to delete this.?';
   public popoverStatusTitle: string = 'Confirm Status Change';
   public popoverStatusMessage: string = 'Are you sure you want to change status.?';
   public cancelClicked: boolean = false;
 
+  constructor(public dialog: MatDialog,public pagesService: PagesService,public alertService: AlertService) { }
 
-  
-  @ViewChild('addUserModal') public addUserModal: ModalDirective;
-  @ViewChild('deleteModal') public deleteModal: ModalDirective;
-  @ViewChild('permissionModal') public permissionModal: ModalDirective;
-  @ViewChild('permissionModal1') public permissionModal1: ModalDirective;
-  @ViewChild('entitiesModal') public entitiesModal: ModalDirective;
-
-  
-  public updateBadgeDialog(badge) {
-    let dialogRef = this.dialog.open(AddBadgeDialogComponent, {
-        data: badge,
+  public updateBadgeDialog(lookup) {
+    let dialogRef = this.dialog.open(AddBadgeDialodComponent, {
+        data: lookup,
         height: 'auto',
         width: '600px',
         autoFocus: false
     });
     dialogRef.afterClosed().subscribe(data => {
-      console.log(data);
       if(data == 'save') {
-        //this.getLookupOptions();
+        this.getBadges({});
       }
     });
   }
 
-  onSubmit(){
-
-  };
-  getstatus(e){
-this.status=e;
-  }
-
-  deleteModalToggle(e)
-  {
-    if(e==1){
-      this.deleteModal.show();
-    }
-    else{
-      this.deleteModal.hide();
-    }
-  }
-
-  addUserModalToggle(e) {
-    if (e == 1) {
-      this.addUserModal.show();
+  updateBadge(badge_id, changedValue, type) {
+    let detail = {"badge_id": badge_id};
+    if(type == 'status') {
+      detail['is_active'] = changedValue;
     } else {
-      this.addUserModal.hide();
+      detail['is_deleted'] = changedValue;
     }
+    this.pagesService.updateBadge(detail)
+    .then(data => {
+      if(data.success) {
+        let message = "";
+        if(type == 'status')
+          message = changedValue ? "activated" : "inactivated";
+        else
+          message = "deleted";
+        this.alertService.createAlert("Badge "+ message +" successfully" , 1);
+        this.getBadges({});
+      }
+      else {
+        this.alertService.createAlert(data.message , 0);
+      }
+    });
   }
-  
-  permissionModalToggle(e){
-    if (e == 1) {
-      this.addUserModal.hide();
-      this.permissionModal.show();
-    }
-    else{
-      this.addUserModal.show();
-      this.permissionModal.hide();
-
-    }
-  }
-
-  permissionModal1Toggle(e){
-    if (e == 1) {
-      this.permissionModal1.show();
-    }
-    else{
-      this.permissionModal1.hide();
-
-    }
-  }
-
-
-  assignEntityToggle(e){
-    if (e == 1) {
-      this.entitiesModal.show();
-    }
-    else{
-      this.entitiesModal.hide();
-
-    }
-  }
-
-  changeStatus(e, Id) {
-    Id--;
-    // console.log(id);
-    // console.log(this.tableList[id]['vcStatus']);
-    this.users[Id]['Status'] = !this.users[Id]['Status'];
-
-  }
-
-  constructor(public appSettings:AppSettings,public dialog: MatDialog) 
-  {
-    this.settings = this.appSettings.settings; 
-    this.users = [
-      { Id: 1, badge_name: 'Bronze Badge', badge_type:"Bronze", criteria1:'50',criteria2: '150',  criteria3: '150'},
-      { Id: 2, badge_name: 'Silver  Badge', badge_type:"Silver ", criteria1:'150',criteria2: '250',  criteria3: '250'},
-      { Id: 3, badge_name: 'Gold  Badge', badge_type:"Gold ", criteria1:'250 ',criteria2: '350',  criteria3: '350'},
-      { Id: 4, badge_name: 'Platinum  Badge', badge_type:"Platinum ", criteria1:'350',criteria2: '450',  criteria3: '450'},
-    ];
-    
-  }
-
 
   ngOnInit() {
+    this.getBadges({});
+  }
+
+  getBadges(filters) {
+    this.pagesService.getBadges(filters).then(data => {
+      if(data.success) {
+        this.tableList = data.results;
+        this.showEmpty = false;
+      }
+      else {
+        this.tableList = [];
+        this.showEmpty = true;
+        this.alertService.createAlert(data.message,0);
+      }
+    })
   }
 
 }

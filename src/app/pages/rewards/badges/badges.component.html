@@ -1,7 +1,8 @@
+<!--This page is used to manage lookups-->
 <div fxLayout="row wrap" #resizedDiv>
     <div class="flex-p w-100">
 
-        <div class="row" style="margin-bottom:14px;">
+        <!-- <div class="row" style="margin-bottom:14px;">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <div class="w-100 flex-p">
                 </div>
@@ -12,49 +13,63 @@
                         Badge</button>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        
+
         <div class="table-responsive">
             <table id="example2" class="table table-bordered table-hover table-striped">
                 <thead class="tbl-head">
                     <tr class="tr-grid-header">
                         <th>Badge Name</th>
-                        <th>Minimum Points</th>
+                        <th>Minimum Coins</th>
                         <th>Minimum Connections</th>
                         <th>Minimum Posts</th>
-                        <th class="text-center">Actions</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr *ngIf="showEmpty"><td colspan="4">No records found</td></tr> -->
-                    <tr *ngFor='let data of users'>
-                        <td>{{data.badge_name}} </td>
-                        <td>{{data.criteria1}}</td>
-                        <td>{{data.criteria2}}</td>
-                        <td>{{data.criteria3}}</td>
+                    <tr *ngIf="showEmpty"><td colspan="5">No records found</td></tr>
+                    <tr *ngFor="let item of tableList">
+                        <td>{{item.badge_name}}</td>
+                        <td>{{item.minimum_points}}</td>
+                        <td>{{item.minimum_connections}}</td>
+                        <td>{{item.minimum_posts}}</td>
+                        <!-- <td *ngIf="!canUpdate || item.lookup_id <= 4" [ngClass]="item.is_active ? '' : 'status Red'">{{item.is_active?'Active':'Inactive'}}</td> -->
+                        <!-- <td>
+                            <a 
+                            [ngClass]="item.is_active ? 'status' : 'status Red'"
+                            mwlConfirmationPopover
+                            [popoverTitle]="popoverStatusTitle"
+                            [popoverMessage]="popoverStatusMessage"
+                            placement="left"
+                            (confirm)="updateLookup(item.lookup_id, !item.is_active, 'status');"
+                            (cancel)="cancelClicked = true">
+                            {{item.is_active?'Active':'Inactive'}}
+                            </a>
+                        </td> -->
                         <td>
                             <a (click)="updateBadgeDialog(item)" style="margin-right: 10px; cursor: pointer;">
-                                <i title="Edit Lookup" class="fa fa-edit"></i>
+                                <i title="Edit Badge" class="fa fa-edit"></i>
                             </a>
                             
                             <!-- <i *ngIf="item.lookup_id <= 4" title="Edit Lookup" class="fa fa-edit fa-disabled" style="margin-right: 10px;"></i> -->
 
                             <!-- <i *ngIf="item.lookup_id <= 4" title="Delete Lookup" class="fa fa-trash red fa-disabled"></i> -->
                             
-                            <a mwlConfirmationPopover
+                            <!-- <a mwlConfirmationPopover
                             [popoverTitle]="popoverTitle"
                             [popoverMessage]="popoverMessage"
                             placement="left"
-                            (confirm)="updateLookup(item.lookup_id, !item.is_deleted, 'delete')"
+                            (confirm)="updateBadge(item.badge_id, !item.is_deleted, 'delete')"
                             (cancel)="cancelClicked = true">
                                 <i style="cursor: pointer;" title="Delete Lookup" class="fa fa-trash red"></i>
-                            </a>
+                            </a> -->
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <mat-paginator [length]="totalSize" [pageIndex]="currentPage" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 50, 100]" (page)="handlePage($event)" showFirstLastButtons></mat-paginator>
         </div>
     </div>
-</div>
 
+</div>
