@@ -38,6 +38,7 @@ export class ModerateusersComponent implements OnInit {
   getAllUsers(filterObj) {
     filterObj['page'] = this.currentPage;
     filterObj['per_page'] = this.pageSize;
+    filterObj['user_type'] = 2;
     this.pagesService.getAllUsers(filterObj).then(data => {
       if(data.success) {
         this.tableList = data.results;

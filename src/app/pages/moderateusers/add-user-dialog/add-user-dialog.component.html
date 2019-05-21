@@ -15,7 +15,7 @@
         <div class="form-group">
           <label class="control-label col-sm-3 add-member-label" for="coins">Email ID : </label>
             <div class="col-sm-8">
-              <input type="text" disabled class="form-control" maxlength="5" maxlength="60" formControlName="email" required id="email" placeholder="Enter User Email"> 
+              <input type="text" disabled class="form-control" maxlength="60" formControlName="email" required id="email" placeholder="Enter User Email"> 
               <div *ngIf="!email.valid && (email.dirty || email.touched)" class="error-text">
                       User Email is required.
               </div>
@@ -24,7 +24,7 @@
         <div class="form-group">
           <label class="control-label col-sm-3 add-member-label" for="location">Location : </label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" maxlength="5" formControlName="location" required id="location" placeholder="Enter Location"> 
+              <input type="text" class="form-control" formControlName="location" required id="location" placeholder="Enter Location"> 
               <div *ngIf="!location.valid && (location.dirty || location.touched)" class="error-text">
                       User Location required.
               </div>

@@ -23,6 +23,7 @@ export class PagesService {
   updatebadgesurl = 'http://localhost:6500/updatebadge';
   getallusersurl = 'http://localhost:6500/getallusers';
   updateuserstatusurl = 'http://localhost:6500/updateuserstatus';
+  updateuserprofileurl = 'http://localhost:6500/updateuserprofile';
 
   getToken() {
     if (localStorage.getItem('login_user_info')) {
@@ -95,6 +96,17 @@ export class PagesService {
       'Authorization': 'Bearer ' + this.getToken()
     });
     return this.http.put(this.updateuserstatusurl, JSON.stringify(filter),{headers:this.headers, withCredentials: true}).toPromise()
+    .then(this.extractData)
+    .catch(this.handleErrorPromise);
+  }
+
+  updateUserProfile(filter) : Promise <any> {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.getToken()
+    });
+    return this.http.put(this.updateuserprofileurl, JSON.stringify(filter),{headers:this.headers, withCredentials: true}).toPromise()
     .then(this.extractData)
     .catch(this.handleErrorPromise);
   }

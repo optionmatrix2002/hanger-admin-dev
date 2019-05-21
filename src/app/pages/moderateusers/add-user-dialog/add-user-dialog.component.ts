@@ -66,7 +66,15 @@ export class AddUserDialogComponent implements OnInit {
     detail['location'] = this.addUserForm.value.location;
     detail['badge_id'] = this.addUserForm.value.badge;
     console.log(detail);
-    
+    this.pagesService.updateUserProfile(detail).then(data => {
+      if(data.success) {
+        this.alertService.createAlert("User Profile Updated Successfully",1);
+        this.dialogRef.close('save');
+      }
+      else {
+        this.alertService.createAlert(data.message,0);
+      }
+    })
   }
 
 }
