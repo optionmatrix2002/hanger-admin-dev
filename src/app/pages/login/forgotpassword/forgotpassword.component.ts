@@ -19,7 +19,7 @@ export class ForgotpasswordComponent implements OnInit {
   public form:FormGroup;
   public settings: Settings;
 
-  constructor(public appSettings:AppSettings, private location: Location ,public fb: FormBuilder, public router:Router, public alertService: AlertService) {
+  constructor(public appSettings:AppSettings, private location: Location ,public fb: FormBuilder, public router:Router, public alertService: AlertService, public pagesService: PagesService) {
     this.settings = this.appSettings.settings; 
     this.form = this.fb.group({
       'email': [null, Validators.compose([Validators.required, emailValidator])],
@@ -34,16 +34,16 @@ export class ForgotpasswordComponent implements OnInit {
   }
 
   public onSubmit(values:any):void {
-    // if (this.form.valid) {
-    //   this.loginService.forgetPassword(values.email).then(res => {
-    //     if (res.success) {
-    //       this.alertService.createAlert(res.message, 1);
-    //       this.router.navigate(['/login']);
-    //     } else {
-    //       this.alertService.createAlert(res.message, 0);
-    //     }
-    //   });
-    // }
+    if (this.form.valid) {
+      this.pagesService.forgetPassword(values.email).then(res => {
+        if (res.success) {
+          this.alertService.createAlert(res.message, 1);
+          this.router.navigate(['/login']);
+        } else {
+          this.alertService.createAlert(res.message, 0);
+        }
+      });
+    }
   }
 
   ngAfterViewInit(){

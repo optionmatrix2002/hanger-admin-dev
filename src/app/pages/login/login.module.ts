@@ -7,12 +7,14 @@ import { LoginComponent } from './login.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { TooltipModule } from "ngx-tooltip";
+import { VerifyuserComponent } from './verifyuser/verifyuser.component';
 
 export const routes = [
   { path: '',  redirectTo:'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'resetpassword', component: ResetpasswordComponent },
+  { path: 'activateuser', component: VerifyuserComponent },
 ];
 
 @NgModule({
@@ -27,7 +29,8 @@ export const routes = [
   declarations: [
     LoginComponent,
     ForgotpasswordComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    VerifyuserComponent
   ]
 })
 export class LoginModule { }

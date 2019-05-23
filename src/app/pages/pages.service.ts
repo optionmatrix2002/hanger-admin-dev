@@ -24,6 +24,9 @@ export class PagesService {
   getallusersurl = 'http://localhost:6500/getallusers';
   updateuserstatusurl = 'http://localhost:6500/updateuserstatus';
   updateuserprofileurl = 'http://localhost:6500/updateuserprofile';
+  forgetpassurl = 'http://localhost:6500/forgotpassword';
+  checkurlstatus = 'http://locathost:6500/checkurlstatus';
+  createpasswordurl = 'http://localhost:6500/activateuser';
 
   getToken() {
     if (localStorage.getItem('login_user_info')) {
@@ -152,6 +155,44 @@ export class PagesService {
       'Authorization': 'Bearer ' + token
     });
     return this.http.get(this.checksessionurl, { headers: headers2, withCredentials: true }).toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
+  userCreatePassword( uid, accToken): Promise<any> {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+    });
+    var data = {
+      userId: uid,
+      accessToken: accToken
+    }
+    return this.http.post(this.createpasswordurl, JSON.stringify(data), { headers: this.headers }).toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
+  forgetPassword(email): Promise<any> {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+    });
+    var data = {
+      email: email
+    }
+    return this.http.post(this.forgetpassurl, JSON.stringify(data), { headers: this.headers }).toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
+  urlStatusCheck(uid, accessToken): Promise<any> {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+    });
+    var data = {
+      userId: uid,
+      accessToken: accessToken
+    }
+    return this.http.post(this.checkurlstatus, JSON.stringify(data), { headers: this.headers }).toPromise()
       .then(this.extractData)
       .catch(this.handleErrorPromise);
   }

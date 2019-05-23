@@ -44,7 +44,6 @@ export class ModerateusersComponent implements OnInit {
       if(data.success) {
         this.tableList = data.results;
         this.totalSize = data.count;
-        console.log(this.tableList);
         data.count ? this.showEmpty = false : this.showEmpty = true;
         this.changeDetectorRefs.detectChanges();
       }

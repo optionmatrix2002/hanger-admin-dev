@@ -1,0 +1,35 @@
+<!--Login page-->
+<style>
+    .login{
+    background: #229494!important;
+    color: white !important;
+    }
+    .login:hover {
+        background: #4dadad!important
+    }
+  </style>
+  <mat-sidenav-container>
+    <div fxLayout="row" fxLayoutAlign="center center" class="h-100">
+        <form  fxFlex="80" fxFlex.gt-sm="30" fxFlex.sm="60">
+            <mat-card class="p-0 mat-elevation-z24 box">
+                <div fxLayout="column" fxLayoutAlign="center center" class="bg-primary box-header">
+                    <!-- <button mat-fab color="accent" class="mat-elevation-z12" (click)="onSubmit(form.value);">
+                        <mat-icon>exit_to_app</mat-icon>
+                    </button>
+                    <a mat-button routerLink="/register">Don't have an account? Sign up now!</a> -->
+                    <img *ngIf="settings.menu == 'horizontal'" src="../../assets/favicon.jpg" routerLink="/dashboard" alt="logo"
+                        class="logo-default logo-img img img-responsive imgmediamain logoimg" style="max-width: 90px;">
+                </div>
+                <mat-card-content style="margin-left: 5px" class="box-content">
+                    <div class="col-sm-10">
+                      <h4 *ngIf="message" class="marginss">Your Account has been verified Successfully</h4>
+                      <h4 *ngIf="!message" class="marginsss">Your account verification failed.Please contact support<br> <b>info@hanger.life</b></h4>
+                        <!-- <button routerLink="/login" class="col-sm-5 mat-elevation-z12 box-button" mat-raised-button>BACK</button> -->
+                      <div class="col-sm-2"></div>
+                      <!-- <button class="col-sm-5 mat-elevation-z12 box-button pull-right" mat-raised-button color="primary" type="submit">SUBMIT</button> -->
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </form>
+    </div>
+  </mat-sidenav-container>
