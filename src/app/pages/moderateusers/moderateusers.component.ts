@@ -28,6 +28,7 @@ export class ModerateusersComponent implements OnInit {
   canUpdate:any;
   canDelete:any;
   showEmpty: boolean = true;
+  public name_filter = "";
 
   constructor(public changeDetectorRefs:ChangeDetectorRef,public alertService: AlertService,public pagesService: PagesService,public dialog: MatDialog) { }
 
@@ -54,6 +55,13 @@ export class ModerateusersComponent implements OnInit {
         this.alertService.createAlert(data.message,0);
       }
     })
+  }
+
+  filterUsers(value) {
+    let temp = {};
+    this.name_filter = value
+    temp['name'] = value;
+    this.getAllUsers(temp);
   }
 
   public handlePage(e: any) {

@@ -1,4 +1,3 @@
-import { AdminsettingsService } from '../admin-settings/adminsettings.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppSettings } from '../../app.settings';
 import { Settings } from 'src/app/app.settings.model';
@@ -94,7 +93,7 @@ this.status=e;
 
   }
 
-  constructor(public appSettings:AppSettings, private adminsettings :AdminsettingsService) 
+  constructor(public appSettings:AppSettings) 
   {
     this.settings = this.appSettings.settings; 
     this.users = [

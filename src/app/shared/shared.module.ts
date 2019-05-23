@@ -33,7 +33,6 @@ import { MatAutocompleteModule,
          MatToolbarModule,
          MatTooltipModule,
          MatStepperModule } from '@angular/material';
-import { FooterComponent } from '../pages/footer/footer.component';
 import { MglTimelineModule } from 'angular-mgl-timeline';
 
 @NgModule({

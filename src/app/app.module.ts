@@ -23,8 +23,6 @@ import { routing } from './app.routing';
 import { Daterangepicker } from 'ng2-daterangepicker';
 import { AppComponent } from './app.component';
 import { PagesComponent } from './pages/pages.component';
-import { BlankComponent } from './pages/blank/blank.component';
-import { SearchComponent } from './pages/search/search.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ErrorComponent } from './pages/errors/error/error.component';
 import { AppSettings } from './app.settings';
@@ -39,22 +37,11 @@ import { ApplicationsComponent } from './theme/components/applications/applicati
 import { MessagesComponent } from './theme/components/messages/messages.component';
 import { UserMenuComponent } from './theme/components/user-menu/user-menu.component';
 import { ChartModule } from 'angular-highcharts';
-import { FooterComponent } from './pages/footer/footer.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgbAlertModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { BadgesComponent } from './pages/badges/badges.component';
-import { EventsComponent } from './pages/events/events.component';
-import { PostsComponent } from './pages/posts/posts.component';
-import { GigsComponent } from './pages/gigs/gigs.component';
-import { ProjectsComponent } from './pages/projects/projects.component';
 import { AnnouncementsComponent } from './pages/announcements/announcements.component';
-import { VocabComponent } from './pages/vocab/vocab.component';
-import { ViolationsComponent } from './pages/violations/violations.component';
-import { IPComponent } from './pages/ip/ip.component';
-import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { LookupComponent } from './pages/lookup/lookup.component';
 import { AddLookupDialogComponent } from './pages/lookup/add-lookup-dialog/add-lookup-dialog.component'
-import { ItemsComponent } from './pages/items/items.component';
 import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { ToasterModule } from 'angular2-toaster';
@@ -92,23 +79,11 @@ import { AddUserDialogComponent } from './pages/moderateusers/add-user-dialog/ad
     
   ],
   declarations: [
-    NotificationsComponent,
     LookupComponent,
     AddLookupDialogComponent,
-    IPComponent,
-    ViolationsComponent,
-    VocabComponent,
     AnnouncementsComponent,
-    ItemsComponent,
-    BadgesComponent,
-    EventsComponent,
-    PostsComponent,
-    GigsComponent,
-    ProjectsComponent,
     AppComponent,
     PagesComponent,
-    BlankComponent,
-    SearchComponent,
     NotFoundComponent,
     ErrorComponent,
     SidenavComponent,
@@ -121,7 +96,6 @@ import { AddUserDialogComponent } from './pages/moderateusers/add-user-dialog/ad
     MessagesComponent,
     UserMenuComponent,
     AdminDashboardComponent,
-    FooterComponent,
     ModerateusersComponent,
     AddUserDialogComponent,
     
