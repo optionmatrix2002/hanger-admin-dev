@@ -1,13 +1,12 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap';
-import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { CustomOverlayContainer } from './theme/utils/custom-overlay-container';
-import { HttpModule } from '@angular/http';
+import { XHRBackend, HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -22,11 +21,8 @@ import { PipesModule } from './theme/pipes/pipes.module';
 import { routing } from './app.routing';
 import { Daterangepicker } from 'ng2-daterangepicker';
 import { AppComponent } from './app.component';
-import { PagesComponent } from './pages/pages.component';
-import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
-import { ErrorComponent } from './pages/errors/error/error.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { AppSettings } from './app.settings';
-
 import { SidenavComponent } from './theme/components/sidenav/sidenav.component';
 import { VerticalMenuComponent } from './theme/components/menu/vertical-menu/vertical-menu.component';
 import { HorizontalMenuComponent } from './theme/components/menu/horizontal-menu/horizontal-menu.component';
@@ -39,15 +35,12 @@ import { UserMenuComponent } from './theme/components/user-menu/user-menu.compon
 import { ChartModule } from 'angular-highcharts';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgbAlertModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { AnnouncementsComponent } from './pages/announcements/announcements.component';
-import { LookupComponent } from './pages/lookup/lookup.component';
-import { AddLookupDialogComponent } from './pages/lookup/add-lookup-dialog/add-lookup-dialog.component'
 import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { ToasterModule } from 'angular2-toaster';
-import { ModerateusersComponent } from './pages/moderateusers/moderateusers.component';
-import { AddUserDialogComponent } from './pages/moderateusers/add-user-dialog/add-user-dialog.component';
-
+import { LoaderService } from './shared/loader.service';
+import { AppInterceptorService } from './shared/app-interceptor.service';
+import { AlertService } from './shared/alert.service';
 
 @NgModule({
   
@@ -79,13 +72,8 @@ import { AddUserDialogComponent } from './pages/moderateusers/add-user-dialog/ad
     
   ],
   declarations: [
-    LookupComponent,
-    AddLookupDialogComponent,
-    AnnouncementsComponent,
     AppComponent,
-    PagesComponent,
     NotFoundComponent,
-    ErrorComponent,
     SidenavComponent,
     VerticalMenuComponent,
     HorizontalMenuComponent,
@@ -96,23 +84,18 @@ import { AddUserDialogComponent } from './pages/moderateusers/add-user-dialog/ad
     MessagesComponent,
     UserMenuComponent,
     AdminDashboardComponent,
-    ModerateusersComponent,
-    AddUserDialogComponent,
-    
-    
-    
-    
   ],
   entryComponents:[
-    VerticalMenuComponent,
-    AddLookupDialogComponent,
-    AddUserDialogComponent
+    VerticalMenuComponent
   ],
   providers: [ 
+    AlertService,
+    LoaderService,
     AppSettings,
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: OverlayContainer, useClass: CustomOverlayContainer  },
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: XHRBackend, useClass: AppInterceptorService }
   ],
   bootstrap: [AppComponent]
 })

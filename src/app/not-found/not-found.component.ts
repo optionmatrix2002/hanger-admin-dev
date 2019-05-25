@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppSettings } from '../../../app.settings';
-import { Settings } from '../../../app.settings.model';
+import { AppSettings } from '../app.settings';
+import { Settings } from '../app.settings.model';
 
 @Component({
   selector: 'app-not-found',
