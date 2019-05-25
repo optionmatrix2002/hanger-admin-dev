@@ -12,6 +12,9 @@ import { AlertService } from '../../../shared/alert.service';
 export class BadgesComponent implements OnInit {
   tableList: any;
   showEmpty : boolean = true;
+  public pageSize = parseInt(localStorage.getItem('settings') ? localStorage.getItem('settings') :'5');
+  public currentPage = 0;
+  public totalSize = 0;
   public popoverTitle: string = 'Confirm Delete';
   public popoverMessage: string = 'Are you sure you want to delete this.?';
   public popoverStatusTitle: string = 'Confirm Status Change';
@@ -59,6 +62,12 @@ export class BadgesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getBadges({});
+  }
+
+  public handlePage(e: any) {
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
     this.getBadges({});
   }
 

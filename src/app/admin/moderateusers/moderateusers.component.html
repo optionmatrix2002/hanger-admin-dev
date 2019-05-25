@@ -41,22 +41,22 @@
               <tbody>
                 <tr *ngIf="showEmpty"><td colspan="7">No records found</td></tr>
                 <tr *ngFor="let item of tableList">
-                    <td>{{item.full_name}}</td>
-                    <td>{{item.tbl_user.email}}</td>
-                    <td>{{item.location}}</td>
+                    <td>{{item.tbl_user_profile.full_name}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.tbl_user_profile.location}}</td>
                     <td>{{item.member_type ? item.member_type : '-'}}</td>
-                    <td>{{item.tbl_badge.badge_name}}</td>
+                    <td>{{item.tbl_user_profile.tbl_badge.badge_name}}</td>
                     <!-- <td *ngIf="!canUpdate || item.lookup_id <= 4" [ngClass]="item.is_active ? '' : 'status Red'">{{item.is_active?'Active':'Inactive'}}</td> -->
                     <td>
                         <a 
-                        [ngClass]="item.tbl_user.is_active ? 'status' : 'status Red'"
+                        [ngClass]="item.is_active ? 'status' : 'status Red'"
                         mwlConfirmationPopover
                         [popoverTitle]="popoverStatusTitle"
                         [popoverMessage]="popoverStatusMessage"
                         placement="left"
-                        (confirm)="updateUserStatus(item.tbl_user.user_id, !item.tbl_user.is_active, 'status');"
+                        (confirm)="updateUserStatus(item.user_id, !item.is_active, 'status');"
                         (cancel)="cancelClicked = true">
-                        {{item.tbl_user.is_active?'Active':'Inactive'}}
+                        {{item.is_active?'Active':'Inactive'}}
                         </a>
                     </td>
                     <td>
@@ -72,7 +72,7 @@
                         [popoverTitle]="popoverTitle"
                         [popoverMessage]="popoverMessage"
                         placement="left"
-                        (confirm)="updateUserStatus(item.tbl_user.user_id, !item.tbl_user.is_deleted, 'delete')"
+                        (confirm)="updateUserStatus(item.user_id, !item.is_deleted, 'delete')"
                         (cancel)="cancelClicked = true">
                             <i style="cursor: pointer;" title="Delete User" class="fa fa-trash red"></i>
                         </a>

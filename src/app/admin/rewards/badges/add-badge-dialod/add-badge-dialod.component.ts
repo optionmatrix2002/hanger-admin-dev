@@ -42,7 +42,7 @@ export class AddBadgeDialodComponent implements OnInit {
     });
   }
 
-  saveBadge(filters) {
+  saveBadge() {
     let detail = {"badge_id": this.badge.badge_id};
     detail['minimum_points'] = this.addBadgeForm.value.minimumCoins;
     detail['minimum_connections'] = this.addBadgeForm.value.minimumConnections;
