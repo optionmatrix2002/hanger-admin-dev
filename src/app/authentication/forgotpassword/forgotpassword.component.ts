@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { emailValidator } from '../../../theme/utils/app-validators';
-import { AppSettings } from '../../../app.settings';
-import { Settings } from '../../../app.settings.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { PagesService } from '../../pages.service';
-import { AlertService } from '../../../shared/alert.service';
-import { Alert } from 'selenium-webdriver';
+import { Settings } from 'src/app/app.settings.model';
+import { AppSettings } from 'src/app/app.settings';
+import { AlertService } from 'src/app/shared/alert.service';
+import { PagesService } from 'src/app/admin/pages.service';
+import { emailValidator } from 'src/app/theme/utils/app-validators';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -16,24 +15,27 @@ import { Alert } from 'selenium-webdriver';
 })
 export class ForgotpasswordComponent implements OnInit {
 
-  public form:FormGroup;
+  public form: FormGroup;
   public settings: Settings;
 
-  constructor(public appSettings:AppSettings, private location: Location ,public fb: FormBuilder, public router:Router, public alertService: AlertService, public pagesService: PagesService) {
-    this.settings = this.appSettings.settings; 
+  constructor(public appSettings: AppSettings,
+    private location: Location, public fb: FormBuilder,
+    public router: Router, public alertService: AlertService,
+    public pagesService: PagesService) {
+    this.settings = this.appSettings.settings;
     this.form = this.fb.group({
       'email': [null, Validators.compose([Validators.required, emailValidator])],
     });
-   }
+  }
 
-   goBack() {
+  goBack() {
     this.location.back();
   }
 
   ngOnInit() {
   }
 
-  public onSubmit(values:any):void {
+  public onSubmit(values: any): void {
     if (this.form.valid) {
       this.pagesService.forgetPassword(values.email).then(res => {
         if (res.success) {
@@ -46,8 +48,9 @@ export class ForgotpasswordComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit(){
-    this.settings.loadingSpinner = false; 
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngAfterViewInit() {
+    this.settings.loadingSpinner = false;
   }
 
 }

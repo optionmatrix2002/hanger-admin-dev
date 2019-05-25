@@ -28,6 +28,7 @@ export class RegisterComponent {
     }
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit(){
     this.settings.loadingSpinner = false; 
   }

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ChangeDetectorRef} from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef, OnInit } from '@angular/core';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
 import { Observable } from 'rxjs/Observable';
@@ -16,10 +16,11 @@ export class AppComponent {
   public settings: Settings;
   private toasterService: ToasterService;
 
-  constructor(private cdref: ChangeDetectorRef, public appSettings:AppSettings, toasterService: ToasterService, public loaderService: LoaderService,){
+  constructor(private cdref: ChangeDetectorRef,
+    public appSettings: AppSettings, toasterService: ToasterService, public loaderService: LoaderService) {
     this.toasterService = toasterService;
     this.settings = this.appSettings.settings;
-  } 
+  }
 
   public config: ToasterConfig =
     new ToasterConfig({
@@ -35,7 +36,4 @@ export class AppComponent {
     this.message$ = this.loaderService.message$;
   }
 
-  ngAfterContentChecked() {
-    this.cdref.detectChanges();
-  }
 }

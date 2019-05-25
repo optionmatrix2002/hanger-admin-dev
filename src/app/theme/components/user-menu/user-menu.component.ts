@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { PagesService } from '../../../pages/pages.service';
 import { AlertService } from '../../../shared/alert.service';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { PagesService } from 'src/app/admin/pages.service';
 
 @Component({
   selector: 'app-user-menu',

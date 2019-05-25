@@ -13,7 +13,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true,
-  suppressScrollX: true               
+  suppressScrollX: true
 };
 import { CalendarModule } from 'angular-calendar';
 import { SharedModule } from './shared/shared.module';
@@ -32,7 +32,6 @@ import { FullScreenComponent } from './theme/components/fullscreen/fullscreen.co
 import { ApplicationsComponent } from './theme/components/applications/applications.component';
 import { MessagesComponent } from './theme/components/messages/messages.component';
 import { UserMenuComponent } from './theme/components/user-menu/user-menu.component';
-import { ChartModule } from 'angular-highcharts';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgbAlertModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
@@ -41,9 +40,10 @@ import { ToasterModule } from 'angular2-toaster';
 import { LoaderService } from './shared/loader.service';
 import { AppInterceptorService } from './shared/app-interceptor.service';
 import { AlertService } from './shared/alert.service';
+import { LoginModule } from './authentication/login.module';
+import { ChartModule } from 'angular-highcharts';
 
 @NgModule({
-  
   imports: [
     NgxMatDrpModule,
     ConfirmationPopoverModule.forRoot({
@@ -69,7 +69,6 @@ import { AlertService } from './shared/alert.service';
     NgbPaginationModule, NgbAlertModule,
     Daterangepicker
 
-    
   ],
   declarations: [
     AppComponent,
@@ -82,8 +81,7 @@ import { AlertService } from './shared/alert.service';
     FullScreenComponent,
     ApplicationsComponent,
     MessagesComponent,
-    UserMenuComponent,
-    AdminDashboardComponent,
+    UserMenuComponent
   ],
   entryComponents:[
     VerticalMenuComponent

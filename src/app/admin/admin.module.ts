@@ -9,6 +9,10 @@ import { LookupComponent } from './lookup/lookup.component';
 import { ModerateusersComponent } from './moderateusers/moderateusers.component';
 import { AddLookupDialogComponent } from './lookup/add-lookup-dialog/add-lookup-dialog.component'
 import { AddUserDialogComponent } from './moderateusers/add-user-dialog/add-user-dialog.component';
+import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
+import { ChartModule } from 'angular-highcharts';
+import { ModalModule } from 'ngx-bootstrap';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 export const routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -25,7 +29,13 @@ export const routes = [
     RouterModule.forChild(routes),
     FormsModule, 
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgxMatDrpModule,
+    ChartModule,
+    ModalModule.forRoot(),
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger' // set defaults here
+    }),
   ],
   declarations: [
     AdminDashboardComponent,
@@ -37,7 +47,7 @@ export const routes = [
   ],
   entryComponents:[
     AddLookupDialogComponent,
-    AddUserDialogComponent
+    AddUserDialogComponent 
   ],
 })
-export class LoginModule { }
+export class AdminModule { }

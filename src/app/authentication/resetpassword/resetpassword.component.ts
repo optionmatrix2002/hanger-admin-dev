@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
-import { AlertService } from '../../../shared/alert.service';
-import { MustMatch } from '../../../shared/must-match.validator';
-import { AppSettings } from '../../../app.settings';
-import { Settings } from '../../../app.settings.model';
+import { Settings } from 'src/app/app.settings.model';
+import { AppSettings } from 'src/app/app.settings';
+import { AlertService } from 'src/app/shared/alert.service';
+import { MustMatch } from 'src/app/shared/must-match.validator';
+
 
 @Component({
   selector: 'app-resetpassword',
@@ -27,7 +28,10 @@ export class ResetpasswordComponent implements OnInit {
   isValidate = false;
   private _submitted: boolean = false;
 
-  constructor(public appSettings:AppSettings,private activatedRoute: ActivatedRoute, public fb: FormBuilder, public router:Router, public alertService: AlertService) { 
+  constructor(public appSettings:AppSettings,
+    private activatedRoute: ActivatedRoute,
+     public fb: FormBuilder, public router:Router,
+      public alertService: AlertService) { 
     this.createForm();
     this.settings = this.appSettings.settings; 
   }

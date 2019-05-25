@@ -3,9 +3,9 @@ import { Request, XHRBackend, BrowserXhr, ResponseOptions, XSRFStrategy, Respons
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { Router } from "@angular/router";
-import { LoaderService } from '../../shared/services/loader.service';
 import {MatDialog} from '@angular/material';
+import { LoaderService } from './loader.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AppInterceptorService extends XHRBackend {

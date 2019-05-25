@@ -1,30 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { emailValidator } from '../../theme/utils/app-validators';
-import { AppSettings } from '../../app.settings';
-import { Settings } from '../../app.settings.model';
-import { PagesService } from '../pages.service';
-import { AlertService } from '../../shared/alert.service';
-import { Alert } from 'selenium-webdriver';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Settings } from '../app.settings.model';
+import { AppSettings } from '../app.settings';
+import { AlertService } from '../shared/alert.service';
+import { PagesService } from '../admin/pages.service';
+import { emailValidator } from '../theme/utils/app-validators';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-a-login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent {
-  public form:FormGroup;
+export class LoginComponent implements OnInit, AfterViewInit {
+  public form: FormGroup;
   public settings: Settings;
-  constructor(public appSettings:AppSettings, public fb: FormBuilder, public router:Router,public alertService:AlertService,public pagesService: PagesService){
-    this.settings = this.appSettings.settings; 
+  constructor(public appSettings: AppSettings,
+    public fb: FormBuilder, public router: Router,
+    public alertService: AlertService, public pagesService: PagesService) {
+    this.settings = this.appSettings.settings;
     this.form = this.fb.group({
       'email': [null, Validators.compose([Validators.required, emailValidator])],
-      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])] 
+      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])]
     });
   }
 
   ngOnInit() {
-    if (localStorage.getItem('login_user_info')) {
+    console.log("dasdkl")
+   // this.router.navigate(['/login']);
+    /* if (localStorage.getItem('login_user_info')) {
       var currentUser = JSON.parse(localStorage.getItem('login_user_info'));
       console.log(currentUser);
       let token = currentUser.auth_token;
@@ -34,14 +37,14 @@ export class LoginComponent {
           this.router.navigate(['/dashboard']);
         }
       });
-    }
+    } */
   }
 
-  public onSubmit(values:any):void {
+  public onSubmit(values: any): void {
     if (this.form.valid) {
       this.pagesService.loginCheck(values.email, values.password).then(res => {
-        if(res.auth) {
-          this.alertService.createAlert("Login Successful",1);
+        if (res.auth) {
+          this.alertService.createAlert("Login Successful", 1);
           console.log(res);
           let per_data = res;
           localStorage.setItem('login_user_info', JSON.stringify(res));
@@ -49,7 +52,7 @@ export class LoginComponent {
           this.router.navigate(['/dashboard']);
         }
         else {
-          this.alertService.createAlert(res.message,0);
+          this.alertService.createAlert(res.message, 0);
         }
       }).catch(e => {
         console.log(e);
@@ -57,7 +60,7 @@ export class LoginComponent {
     }
   }
 
-  ngAfterViewInit(){
-    this.settings.loadingSpinner = false; 
+  ngAfterViewInit() {
+    this.settings.loadingSpinner = false;
   }
 }
