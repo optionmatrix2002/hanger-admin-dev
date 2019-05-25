@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Settings } from '../app.settings.model';
 import { AppSettings } from '../app.settings';
 import { AlertService } from '../shared/alert.service';
-import { PagesService } from '../admin/pages.service';
+import { LoginService } from './login.service';
 import { emailValidator } from '../theme/utils/app-validators';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public settings: Settings;
   constructor(public appSettings: AppSettings,
     public fb: FormBuilder, public router: Router,
-    public alertService: AlertService, public pagesService: PagesService) {
+    public alertService: AlertService, public loginService: LoginService) {
     this.settings = this.appSettings.settings;
     this.form = this.fb.group({
       'email': [null, Validators.compose([Validators.required, emailValidator])],
@@ -42,14 +42,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   public onSubmit(values: any): void {
     if (this.form.valid) {
-      this.pagesService.loginCheck(values.email, values.password).then(res => {
+      this.loginService.loginCheck(values.email, values.password).then(res => {
         if (res.auth) {
           this.alertService.createAlert("Login Successful", 1);
           console.log(res);
           let per_data = res;
           localStorage.setItem('login_user_info', JSON.stringify(res));
           console.log(localStorage.getItem('login_user_info'));
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/admin/dashboard']);
         }
         else {
           this.alertService.createAlert(res.message, 0);

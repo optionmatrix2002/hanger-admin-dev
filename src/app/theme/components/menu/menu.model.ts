@@ -6,6 +6,7 @@ export class Menu {
                 public icon: string,
                 public target: string,
                 public hasSubMenu: boolean,
+                public parentId: number, 
                 public color: string,
-                public parentId: number) { }
-}  
+                public hasPermission: boolean) { }
+} 

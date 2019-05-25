@@ -12,21 +12,15 @@ import { Observable } from 'rxjs/Rx'
 
 export class PagesService {
   public headers: any;
-  getlookupsurl = "http://localhost:6500/getlookups";
-  addlookupsurl='http://localhost:6500/addlookups';
-  loginurl = 'http://localhost:6500/login';
-  checksessionurl = 'http://localhost:6500/checksession';
-  logouturl = 'http://localhost:6500/logout';
-  getlookupoptionsurl = 'http://localhost:6500/getlookupoptions';
-  updatelookupurl = 'http://localhost:6500/updatelookup';
-  getbadgesurl = 'http://localhost:6500/getbadges';
-  updatebadgesurl = 'http://localhost:6500/updatebadge';
-  getallusersurl = 'http://localhost:6500/getallusers';
-  updateuserstatusurl = 'http://localhost:6500/updateuserstatus';
-  updateuserprofileurl = 'http://localhost:6500/updateuserprofile';
-  forgetpassurl = 'http://localhost:6500/forgotpassword';
-  checkurlstatus = 'http://locathost:6500/checkurlstatus';
-  createpasswordurl = 'http://localhost:6500/activateuser';
+  getlookupsurl = "/getlookups";
+  addlookupsurl='/addlookups';
+  getlookupoptionsurl = '/getlookupoptions';
+  updatelookupurl = '/updatelookup';
+  getbadgesurl = '/getbadges';
+  updatebadgesurl = '/updatebadge';
+  getallusersurl = '/getallusers';
+  updateuserstatusurl = '/updateuserstatus';
+  updateuserprofileurl = '/updateuserprofile';
 
   getToken() {
     if (localStorage.getItem('login_user_info')) {
@@ -134,73 +128,6 @@ export class PagesService {
     return this.http.post(this.getallusersurl, JSON.stringify(filter), {headers:this.headers, withCredentials:true}).toPromise()
     .then(this.extractData)
     .catch(this.handleErrorPromise);
-  }
-
-  loginCheck(uname, pswd): Promise<any> {
-    this.headers = new Headers({
-      'Content-Type': 'application/json',
-    });
-    var data = {
-      email: uname,
-      password: pswd
-    }
-    return this.http.post(this.loginurl, JSON.stringify(data), { headers: this.headers, withCredentials: true }).toPromise()
-      .then(this.extractData)
-      .catch(this.handleErrorPromise);
-  }
-
-  checkSessionAlive(token) {
-    let headers2 = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
-    });
-    return this.http.get(this.checksessionurl, { headers: headers2, withCredentials: true }).toPromise()
-      .then(this.extractData)
-      .catch(this.handleErrorPromise);
-  }
-
-  userCreatePassword( uid, accToken): Promise<any> {
-    this.headers = new Headers({
-      'Content-Type': 'application/json',
-    });
-    var data = {
-      userId: uid,
-      accessToken: accToken
-    }
-    return this.http.post(this.createpasswordurl, JSON.stringify(data), { headers: this.headers }).toPromise()
-      .then(this.extractData)
-      .catch(this.handleErrorPromise);
-  }
-
-  forgetPassword(email): Promise<any> {
-    this.headers = new Headers({
-      'Content-Type': 'application/json',
-    });
-    var data = {
-      email: email
-    }
-    return this.http.post(this.forgetpassurl, JSON.stringify(data), { headers: this.headers }).toPromise()
-      .then(this.extractData)
-      .catch(this.handleErrorPromise);
-  }
-
-  urlStatusCheck(uid, accessToken): Promise<any> {
-    this.headers = new Headers({
-      'Content-Type': 'application/json',
-    });
-    var data = {
-      userId: uid,
-      accessToken: accessToken
-    }
-    return this.http.post(this.checkurlstatus, JSON.stringify(data), { headers: this.headers }).toPromise()
-      .then(this.extractData)
-      .catch(this.handleErrorPromise);
-  }
-
-  logOut(): Promise<any> {
-    return this.http.post(this.logouturl, { headers: this.headers}).toPromise()
-      .then(this.extractData)
-      .catch(this.handleErrorPromise);
   }
 
   private extractData(res :Response) { 

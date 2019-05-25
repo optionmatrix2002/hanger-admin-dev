@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AlertService } from '../../../shared/alert.service';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
-import { PagesService } from 'src/app/admin/pages.service';
+import { LoginService } from '../../../authentication/login.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -11,10 +11,10 @@ import { PagesService } from 'src/app/admin/pages.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class UserMenuComponent implements OnInit {
-  public userImage = '../assets/img/users/nm.jpg';
-  constructor(public router :Router,public pagesService: PagesService,public alertService: AlertService,private dialogRef: MatDialog,) { }
+  public userImage = '../assets/img/users/default-user.jpg';
+  constructor(public router :Router,public loginService: LoginService,public alertService: AlertService,private dialogRef: MatDialog,) { }
   public logoutUser() {
-    this.pagesService.logOut().then(res => {
+    this.loginService.logOut().then(res => {
       if(res.success) {
         this.dialogRef.closeAll();
         localStorage.removeItem('login_user_info');

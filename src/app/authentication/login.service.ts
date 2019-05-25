@@ -14,7 +14,6 @@ export class LoginService {
   resetpassurl = '/resetpassword';
   checksessionurl = '/checksession';
   logouturl = "/logout";
-  checkurlstatus = '/checkurlstatus';
   createpasswordurl = '/activateuser';
   checkresetpassurl = '/checkresetpassurlstatus';
 
@@ -69,20 +68,9 @@ export class LoginService {
       .catch(this.handleErrorPromise);
   }
 
-  urlStatusCheck(uid, accessToken): Promise<any> {
+  activateUser(uid, accToken): Promise<any> {
     var data = {
       userId: uid,
-      accessToken: accessToken
-    }
-    return this.http.post(this.checkurlstatus, JSON.stringify(data), { headers: this.headers }).toPromise()
-      .then(this.extractData)
-      .catch(this.handleErrorPromise);
-  }
-
-  userCreatePassword(pswd, uid, accToken): Promise<any> {
-    var data = {
-      userId: uid,
-      password: pswd,
       accessToken: accToken
     }
     return this.http.post(this.createpasswordurl, JSON.stringify(data), { headers: this.headers }).toPromise()

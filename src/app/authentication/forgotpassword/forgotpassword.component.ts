@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { Settings } from 'src/app/app.settings.model';
 import { AppSettings } from 'src/app/app.settings';
 import { AlertService } from 'src/app/shared/alert.service';
-import { PagesService } from 'src/app/admin/pages.service';
+import { LoginService } from '../login.service';
 import { emailValidator } from 'src/app/theme/utils/app-validators';
 
 @Component({
@@ -21,7 +21,7 @@ export class ForgotpasswordComponent implements OnInit {
   constructor(public appSettings: AppSettings,
     private location: Location, public fb: FormBuilder,
     public router: Router, public alertService: AlertService,
-    public pagesService: PagesService) {
+    public loginService: LoginService) {
     this.settings = this.appSettings.settings;
     this.form = this.fb.group({
       'email': [null, Validators.compose([Validators.required, emailValidator])],
@@ -37,7 +37,7 @@ export class ForgotpasswordComponent implements OnInit {
 
   public onSubmit(values: any): void {
     if (this.form.valid) {
-      this.pagesService.forgetPassword(values.email).then(res => {
+      this.loginService.forgetPassword(values.email).then(res => {
         if (res.success) {
           this.alertService.createAlert(res.message, 1);
           this.router.navigate(['/login']);

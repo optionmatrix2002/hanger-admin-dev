@@ -16,12 +16,14 @@ export class HorizontalMenuComponent implements OnInit {
   @Input('menuParentId') menuParentId;
   public menuItems:Array<any>;
   public settings: Settings;
+  public currentYear: String;
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   constructor(public appSettings:AppSettings, public menuService:MenuService, public router:Router) { 
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit() {
+    this.currentYear = ''+ (new Date()).getFullYear();
     this.menuItems = this.menuService.getHorizontalMenuItems();
     this.menuItems = this.menuItems.filter(item => item.parentId == this.menuParentId);
   }

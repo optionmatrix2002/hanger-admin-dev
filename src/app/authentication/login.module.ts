@@ -8,12 +8,15 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { VerifyuserComponent } from './verifyuser/verifyuser.component';
 import { TooltipModule } from 'ngx-bootstrap';
 import { SharedModule } from '../shared/shared.module';
+import { LoginService } from './login.service';
+
 
 export const routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo:'login', pathMatch : 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'resetpassword', component: ResetpasswordComponent },
-  { path: 'activateuser', component: VerifyuserComponent },
+  { path: 'userverification', component: VerifyuserComponent },
 ];
 
 @NgModule({
@@ -30,6 +33,9 @@ export const routes = [
     ForgotpasswordComponent,
     ResetpasswordComponent,
     VerifyuserComponent
-  ]
+  ],
+  providers: [ 
+    LoginService
+  ],
 })
 export class LoginModule { }

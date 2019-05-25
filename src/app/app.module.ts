@@ -42,6 +42,8 @@ import { AppInterceptorService } from './shared/app-interceptor.service';
 import { AlertService } from './shared/alert.service';
 import { LoginModule } from './authentication/login.module';
 import { ChartModule } from 'angular-highcharts';
+import { LayoutComponent } from './layout/layout.component';
+import { LoginService } from './authentication/login.service';
 
 @NgModule({
   imports: [
@@ -81,7 +83,8 @@ import { ChartModule } from 'angular-highcharts';
     FullScreenComponent,
     ApplicationsComponent,
     MessagesComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    LayoutComponent
   ],
   entryComponents:[
     VerticalMenuComponent
@@ -89,6 +92,7 @@ import { ChartModule } from 'angular-highcharts';
   providers: [ 
     AlertService,
     LoaderService,
+    LoginService,
     AppSettings,
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: OverlayContainer, useClass: CustomOverlayContainer  },

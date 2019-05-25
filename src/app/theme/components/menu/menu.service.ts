@@ -1,22 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-
 import { Menu } from './menu.model';
-import { verticalMenuItems, horizontalMenuItems } from './menu';
+//import { verticalMenuItems, horizontalMenuItems } from './menu';
 
 @Injectable()
 export class MenuService {
 
-  constructor(private location:Location,
-              private router:Router){ } 
+  verticalMenuItems : any;
+  horizontalMenuItems : any;
+
+  constructor(private location:Location,private router:Router){
+    let temp =[];
+    temp.push(
+      new Menu (1, 'Dashboard', '/admin/dashboard', null, 'poll', null, false, 0, "red",true),
+      new Menu (2, 'Moderate Members', '/admin/users', null, 'group', null, false, 0, "white",true),
+      new Menu (3, 'Announcements ', '/admin/announcements', null, 'announcement', null, false, 0, "red",true),
+      new Menu (4, 'Rewards', '/admin/rewards', null, 'school', null, true, 0, "red",true),
+      new Menu (5, 'Coins', '/admin/rewards/coins', null, 'school', null, false, 4, "red",true),
+      new Menu (6, 'Badges', '/admin/rewards/badges', null, 'school', null, false,4, "red",true),
+      new Menu (7, 'Lookups', '/admin/lookups', null, 'school', null, false, 0, "white",true)
+    );
+
+    this.verticalMenuItems = temp;
+    this.horizontalMenuItems = temp;
+  } 
     
   public getVerticalMenuItems():Array<Menu> {
-    return verticalMenuItems;
+    return this.verticalMenuItems;
   }
 
   public getHorizontalMenuItems():Array<Menu> {
-    return horizontalMenuItems;
+    return this.horizontalMenuItems;
   }
 
   public expandActiveSubMenu(menu:Array<Menu>){

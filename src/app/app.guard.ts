@@ -8,9 +8,8 @@ import { Observable } from 'rxjs';
 export class AppGuard implements CanActivate {
   constructor(private router : Router) { }
   canActivate(next: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    var userdata = JSON.parse(localStorage.getItem('sg_user_info'));
-    let permissionId = next.data["permissionId"];
-    if(userdata.user_permissions[permissionId].permission_type.split('')[1] != 0)
+    var userdata = JSON.parse(localStorage.getItem('login_user_info'));
+    if(userdata && userdata.auth_token)
       return true;
     else 
       return false;

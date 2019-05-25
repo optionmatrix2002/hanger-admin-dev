@@ -6,7 +6,7 @@ import { Alert } from 'selenium-webdriver';
 import { Settings } from 'src/app/app.settings.model';
 import { AppSettings } from 'src/app/app.settings';
 import { AlertService } from 'src/app/shared/alert.service';
-import { PagesService } from 'src/app/admin/pages.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-verifyuser',
@@ -27,7 +27,7 @@ export class VerifyuserComponent implements OnInit {
     private location: Location,
     public fb: FormBuilder, public router: Router,
     public alertService: AlertService,
-    public pagesService: PagesService) {
+    public loginService: LoginService) {
     this.activatedRoute.queryParams.subscribe(params => {
       this.userId = params.uid;
       this.accesToken = params.activationToken;
@@ -36,10 +36,12 @@ export class VerifyuserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pagesService.userCreatePassword(this.userId, this.accesToken).then(res => {
+    this.loginService.activateUser(this.userId, this.accesToken).then(res => {
       if (res.success) {
         this.message = true;
+        this.isValidate = true;
       } else {
+        this.isValidate = true;
         this.message = false;
       }
     });

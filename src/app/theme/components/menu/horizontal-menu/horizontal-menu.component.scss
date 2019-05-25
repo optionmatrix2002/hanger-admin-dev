@@ -30,12 +30,11 @@
     left: 100%;
     top: 0;
 }
+.active-link{
+    background-color: #50636d !important;
+    border-bottom: #cccccc 5px solid !important;
+}
+.active-link.test{
+    border-bottom: none !important;
+}
 
-// .active-link.test{
-//     border-bottom: none !important;
-// }
-
-
-// .active-link{
-//     border-bottom: #cccccc 5px solid !important;
-// }
