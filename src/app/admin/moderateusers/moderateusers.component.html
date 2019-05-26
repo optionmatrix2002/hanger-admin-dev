@@ -41,11 +41,11 @@
               <tbody>
                 <tr *ngIf="showEmpty"><td colspan="7">No records found</td></tr>
                 <tr *ngFor="let item of tableList">
-                    <td>{{item.tbl_user_profile ? item.tbl_user_profile.full_name : ''}}</td>
+                    <td>{{item.user_name}}</td>
                     <td>{{item.email}}</td>
-                    <td>{{item.tbl_user_profile ? item.tbl_user_profile.location : ''}}</td>
+                    <td>{{item.tbl_user_profile ? item.tbl_user_profile.location : '-'}}</td>
                     <td>{{item.member_type ? item.member_type : '-'}}</td>
-                    <td>{{item.tbl_user_profile ? item.tbl_user_profile.tbl_badge.badge_name : ''}}</td>
+                    <td>{{item.tbl_user_profile ? item.tbl_user_profile.tbl_badge.badge_name : '-'}}</td>
                     <!-- <td *ngIf="!canUpdate || item.lookup_id <= 4" [ngClass]="item.is_active ? '' : 'status Red'">{{item.is_active?'Active':'Inactive'}}</td> -->
                     <td>
                         <a 
