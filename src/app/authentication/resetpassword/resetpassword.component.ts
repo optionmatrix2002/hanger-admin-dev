@@ -18,15 +18,13 @@ export class ResetpasswordComponent implements OnInit {
   public form: FormGroup;
   public settings: Settings;
   today = Date.now();
-  userId: string;
-  resToken: string;
-  timeStamp: string;
   isOneLetter = false;
   isOneCapitalLetter = false;
   isOneNumber = false;
   isOneSpecialCaharacter = false;
   isMinLength = false;
   isValidate = false;
+  public user_id : any;
   private _submitted: boolean = false;
 
   constructor(public appSettings: AppSettings,
@@ -35,9 +33,10 @@ export class ResetpasswordComponent implements OnInit {
     public alertService: AlertService, public loginService: LoginService) {
     this.createForm();
     this.activatedRoute.queryParams.subscribe(params => {
-      this.userId = params.uid;
-      this.resToken = params.resetToken;
-      this.timeStamp = params.tC;
+      this.user_id = params.user_id;
+      if(!this.user_id) {
+        this.router.navigate(['/login']);
+      }
     });
     this.settings = this.appSettings.settings;
   }
@@ -65,19 +64,12 @@ export class ResetpasswordComponent implements OnInit {
 
 
   ngOnInit() {
-    this.loginService.urlResetPasswordCheck(this.userId, this.resToken, this.timeStamp).then(res => {
-      if (!res.success) {
-        this.alertService.createAlert(res.message, 0);
-        this.router.navigate(['/login']);
-      } else {
-      }
-    });
   }
 
   public onSubmit(values: any): void {
     if (this.form.valid) {
       if (values['password'] === values['confirmPassword']) {
-        this.loginService.resetPassword(values.password, this.userId, this.resToken).then(res => {
+        this.loginService.resetPassword(values.password, this.user_id).then(res => {
           if (res.success) {
             this.alertService.createAlert('Password has been sucessfully reset. Please login again', 1);
             this.router.navigate(['/login']);

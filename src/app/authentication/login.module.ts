@@ -6,9 +6,11 @@ import { LoginComponent } from './login.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { VerifyuserComponent } from './verifyuser/verifyuser.component';
+import { VerifyOTPComponent } from './verifyotp/verifyotp.component';
 import { TooltipModule } from 'ngx-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { LoginService } from './login.service';
+import { CookieService, CookieOptions } from 'angular2-cookie/core';
 
 
 export const routes = [
@@ -17,6 +19,7 @@ export const routes = [
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'resetpassword', component: ResetpasswordComponent },
   { path: 'userverification', component: VerifyuserComponent },
+  { path: 'verifyotp', component: VerifyOTPComponent }
 ];
 
 @NgModule({
@@ -29,13 +32,16 @@ export const routes = [
     SharedModule
   ],
   declarations: [
+    VerifyOTPComponent,
     LoginComponent,
     ForgotpasswordComponent,
     ResetpasswordComponent,
     VerifyuserComponent
   ],
   providers: [ 
-    LoginService
+    LoginService,
+    CookieService,
+    { provide: CookieOptions, useValue: {} }
   ],
 })
 export class LoginModule { }

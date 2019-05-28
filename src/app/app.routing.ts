@@ -5,14 +5,15 @@ import { AppGuard } from './app.guard';
 import { LayoutComponent } from './layout/layout.component';
 
 export const routes: Routes = [
-{ path: '', loadChildren: './authentication/login.module#LoginModule' },
 {
     path: 'admin',
     component: LayoutComponent, children: [
         { path: '', loadChildren: './admin/admin.module#AdminModule', canActivate:[AppGuard] },
         { path: '**', component: NotFoundComponent }
     ]
-}];
+},
+{ path: '', loadChildren: './authentication/login.module#LoginModule' },
+];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
     preloadingStrategy: PreloadAllModules,  // <- comment this line for activate lazy load

@@ -1,0 +1,41 @@
+<!--Login page-->
+<style>
+    .login{
+    background: #229494!important;
+    color: white !important;
+    }
+    .login:hover {
+        background: #4dadad!important
+    }
+  </style>
+  <mat-sidenav-container>
+    <div fxLayout="row" fxLayoutAlign="center center" class="h-100">
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxFlex="80" fxFlex.gt-sm="30" fxFlex.sm="60">
+            <mat-card class="p-0 mat-elevation-z24 box">
+                <div fxLayout="column" fxLayoutAlign="center center" class="bg-primary box-header">
+                    <!-- <button mat-fab color="accent" class="mat-elevation-z12" (click)="onSubmit(form.value);">
+                        <mat-icon>exit_to_app</mat-icon>
+                    </button>
+                    <a mat-button routerLink="/register">Don't have an account? Sign up now!</a> -->
+                    <img *ngIf="settings.menu == 'horizontal'" src="../../assets/favicon.jpg" routerLink="/dashboard" alt="logo"
+                        class="logo-default logo-img img img-responsive imgmediamain logoimg" style="max-width: 90px;">
+                </div>
+                <mat-card-content fxLayout="column" fxLayoutAlign="end center" class="box-content">
+                    <mat-card fxLayout="column" fxLayoutAlign="center center" class="mat-elevation-z12 box-content-inner">
+                        <span class="box-content-header" style="margin-bottom: 15px; color: #283593 !important;">Validate OTP</span>
+                        <span>Please enter verification code received from email.</span>
+                        <mat-form-field class="w-100">
+                            <input matInput placeholder="Email" formControlName="otp">
+                            <mat-error *ngIf="form.controls.otp.errors?.required">OTP is required</mat-error>
+                        </mat-form-field>
+                    </mat-card>
+                    <div class="col-sm-10">
+                        <button routerLink="/login" class="col-sm-5 mat-elevation-z12 box-button" mat-raised-button>BACK</button>
+                      <div class="col-sm-2"></div>
+                      <button class="col-sm-5 mat-elevation-z12 box-button pull-right" mat-raised-button color="primary" type="submit">SUBMIT</button>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </form>
+    </div>
+  </mat-sidenav-container>

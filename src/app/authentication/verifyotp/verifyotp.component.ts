@@ -1,31 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Settings } from 'src/app/app.settings.model';
 import { AppSettings } from 'src/app/app.settings';
 import { AlertService } from 'src/app/shared/alert.service';
 import { LoginService } from '../login.service';
-import { emailValidator } from 'src/app/theme/utils/app-validators';
 
 @Component({
-  selector: 'app-forgotpassword',
-  templateUrl: './forgotpassword.component.html',
-  styleUrls: ['./forgotpassword.component.scss']
+  selector: 'app-verifyotp',
+  templateUrl: './verifyotp.component.html',
+  styleUrls: ['./verifyotp.component.scss']
 })
-export class ForgotpasswordComponent implements OnInit {
+export class VerifyOTPComponent implements OnInit {
 
   public form: FormGroup;
   public settings: Settings;
+  public user_id : any;
 
   constructor(public appSettings: AppSettings,
+    private activatedRoute: ActivatedRoute,
     private location: Location, public fb: FormBuilder,
     public router: Router, public alertService: AlertService,
     public loginService: LoginService) {
     this.settings = this.appSettings.settings;
     this.form = this.fb.group({
-      'email': [null, Validators.compose([Validators.required, emailValidator])],
+      'otp': [null, Validators.compose([Validators.required])],
     });
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.user_id = params.user_id;
+      if(!this.user_id) {
+        this.router.navigate(['/login']);
+      }
+    });
+
   }
 
   goBack() {
@@ -37,10 +46,10 @@ export class ForgotpasswordComponent implements OnInit {
 
   public onSubmit(values: any): void {
     if (this.form.valid) {
-      this.loginService.forgetPassword(values.email).then(res => {
+      this.loginService.validateOTP(this.user_id, values.otp).then(res => {
         if (res.success) {
-          this.alertService.createAlert(res.message, 1);
-          this.router.navigate(['/verifyotp'], { queryParams: { user_id: res.user_id } });
+          this.alertService.createAlert('OTP has been validated. Please set your password', 1);
+          this.router.navigate(['/resetpassword'], { queryParams: { user_id: this.user_id } });
         } else {
           this.alertService.createAlert(res.message, 0);
         }

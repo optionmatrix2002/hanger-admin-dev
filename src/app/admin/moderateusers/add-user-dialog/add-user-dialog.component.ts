@@ -20,10 +20,10 @@ export class AddUserDialogComponent implements OnInit {
     console.log(this.user);
     
     if(this.user) {
-      this.addUserForm.controls['userName'].setValue(this.user.tbl_user_profile.full_name);
+      this.addUserForm.controls['userName'].setValue(this.user.user_name);
       this.addUserForm.controls['email'].setValue(this.user.email);
-      this.addUserForm.controls['location'].setValue(this.user.tbl_user_profile.location);
-      this.addUserForm.controls['badge'].setValue(this.user.tbl_user_profile.tbl_badge.badge_id);
+      this.addUserForm.controls['location'].setValue(this.user.tbl_user_profile ? this.user.tbl_user_profile.location : '');
+      this.addUserForm.controls['badge'].setValue(this.user.tbl_user_profile ? this.user.tbl_user_profile.tbl_badge.badge_id : 1);
     }
     this.getBadgesDropdown({});
   }

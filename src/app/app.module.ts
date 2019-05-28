@@ -44,6 +44,7 @@ import { LoginModule } from './authentication/login.module';
 import { ChartModule } from 'angular-highcharts';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginService } from './authentication/login.service';
+import { CookieService, CookieOptions } from 'angular2-cookie/core';
 
 @NgModule({
   imports: [
@@ -94,6 +95,8 @@ import { LoginService } from './authentication/login.service';
     LoaderService,
     LoginService,
     AppSettings,
+    CookieService,
+    { provide: CookieOptions, useValue: {} },
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: OverlayContainer, useClass: CustomOverlayContainer  },
     { provide: LocationStrategy, useClass: HashLocationStrategy },

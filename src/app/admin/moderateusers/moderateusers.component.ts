@@ -70,6 +70,7 @@ export class ModerateusersComponent implements OnInit {
   }
 
   public updateUserDialog(user) {
+    console.log(user);
     let dialogRef = this.dialog.open(AddUserDialogComponent, {
         data: user,
         height: 'auto',

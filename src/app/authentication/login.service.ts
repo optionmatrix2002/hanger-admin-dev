@@ -16,6 +16,7 @@ export class LoginService {
   logouturl = "/logout";
   createpasswordurl = '/activateuser';
   checkresetpassurl = '/checkresetpassurlstatus';
+  validateotpurl = '/validateotp';
 
   headers = new Headers({
     'Content-Type': 'application/json'
@@ -25,7 +26,8 @@ export class LoginService {
   loginCheck(uname, pswd): Promise<any> {
     var data = {
       email: uname,
-      password: pswd
+      password: pswd,
+      user_type: 1
     }
     return this.http.post(this.loginurl, JSON.stringify(data), { headers: this.headers, withCredentials: true }).toPromise()
       .then(this.extractData)
@@ -40,18 +42,28 @@ export class LoginService {
   
   forgetPassword(email): Promise<any> {
     var data = {
-      email: email
+      email: email,
+      user_type: 1
     }
     return this.http.post(this.forgetpassurl, JSON.stringify(data), { headers: this.headers }).toPromise()
       .then(this.extractData)
       .catch(this.handleErrorPromise);
   }
 
-  resetPassword(pswd, uid, resetToken): Promise<any> {
+  validateOTP(uid, otp): Promise<any> {
     var data = {
       userId: uid,
-      password: pswd,
-      accessToken: resetToken
+      otp: otp
+    }
+    return this.http.post(this.validateotpurl, JSON.stringify(data), { headers: this.headers }).toPromise()
+      .then(this.extractData)
+      .catch(this.handleErrorPromise);
+  }
+
+  resetPassword(pswd, uid): Promise<any> {
+    var data = {
+      userId: uid,
+      password: pswd
     }
     return this.http.post(this.resetpassurl, JSON.stringify(data), { headers: this.headers }).toPromise()
       .then(this.extractData)
