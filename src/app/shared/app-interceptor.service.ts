@@ -25,10 +25,12 @@ export class AppInterceptorService extends XHRBackend {
     this.addLoader();
     var port = 6500;
     let iAdd = window.location.hostname;
-    if (request.url.startsWith('/') && iAdd != 'localhost') {
+    if (request.url.startsWith('/') && iAdd == 'dev.hanger.life') {
       request.url = 'http://' + window.location.hostname + '/api/v1' + request.url;     // prefix base url
     } else if(request.url.startsWith('/') && iAdd == 'localhost') {
       request.url = 'http://' + window.location.hostname + ':' +port + request.url;     // prefix base url
+    } else if(request.url.startsWith('/') && iAdd == 'qa.hanger.life') {
+      request.url = 'https://' + window.location.hostname + '/api/v1' + request.url;     // prefix base url
     }
     let xhrConnection = super.createConnection(request);
     xhrConnection.response = xhrConnection.response.map((res: Response) => {
