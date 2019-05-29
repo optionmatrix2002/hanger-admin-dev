@@ -32,6 +32,7 @@ import { FullScreenComponent } from './theme/components/fullscreen/fullscreen.co
 import { ApplicationsComponent } from './theme/components/applications/applications.component';
 import { MessagesComponent } from './theme/components/messages/messages.component';
 import { UserMenuComponent } from './theme/components/user-menu/user-menu.component';
+import { PasswordDialogComponent } from './theme/components/user-menu/password-dialog/password-dialog.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgbAlertModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
@@ -45,6 +46,7 @@ import { ChartModule } from 'angular-highcharts';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginService } from './authentication/login.service';
 import { CookieService, CookieOptions } from 'angular2-cookie/core';
+import {TooltipModule} from "ngx-tooltip";
 
 @NgModule({
   imports: [
@@ -67,13 +69,14 @@ import { CookieService, CookieOptions } from 'angular2-cookie/core';
     PipesModule,
     routing,
     ChartModule,
+    TooltipModule,
     ModalModule.forRoot(),
     HttpClientModule,
     NgbPaginationModule, NgbAlertModule,
     Daterangepicker
-
   ],
   declarations: [
+    PasswordDialogComponent,
     AppComponent,
     NotFoundComponent,
     SidenavComponent,
@@ -88,6 +91,7 @@ import { CookieService, CookieOptions } from 'angular2-cookie/core';
     LayoutComponent
   ],
   entryComponents:[
+    PasswordDialogComponent,
     VerticalMenuComponent
   ],
   providers: [ 
@@ -104,4 +108,5 @@ import { CookieService, CookieOptions } from 'angular2-cookie/core';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

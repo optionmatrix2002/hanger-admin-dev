@@ -29,11 +29,11 @@
           <table id="example2" class="table table-bordered table-hover table-striped">
               <thead class="tbl-head">
                   <tr class="tr-grid-header">
-                      <th>Member Name</th>
-                      <th>Email ID</th>
-                      <th>Location</th>
-                      <th>Member Type</th>
-                      <th>Badge</th>
+                      <th class="alnleft">Member Name</th>
+                      <th class="alnleft">Email ID</th>
+                      <th class="alnleft">Location</th>
+                      <th class="alnleft">Member Type</th>
+                      <th class="alnleft">Badge</th>
                       <th>Status</th>
                       <th>Actions</th>
                   </tr>
@@ -41,11 +41,11 @@
               <tbody>
                 <tr *ngIf="showEmpty"><td colspan="7">No records found</td></tr>
                 <tr *ngFor="let item of tableList">
-                    <td>{{item.user_name}}</td>
-                    <td>{{item.email}}</td>
-                    <td>{{item.tbl_user_profile ? item.tbl_user_profile.location : '-'}}</td>
-                    <td>{{item.member_type ? item.member_type : '-'}}</td>
-                    <td>{{item.tbl_user_profile ? item.tbl_user_profile.tbl_badge.badge_name : '-'}}</td>
+                    <td class="alnleft">{{item.user_name}}</td>
+                    <td class="alnleft">{{item.email}}</td>
+                    <td class="alnleft">{{item.tbl_user_profile ? item.tbl_user_profile.location : '-'}}</td>
+                    <td class="alnleft">{{item.member_type ? item.member_type : '-'}}</td>
+                    <td class="alnleft">{{item.tbl_user_profile ? item.tbl_user_profile.tbl_badge.badge_name : '-'}}</td>
                     <!-- <td *ngIf="!canUpdate || item.lookup_id <= 4" [ngClass]="item.is_active ? '' : 'status Red'">{{item.is_active?'Active':'Inactive'}}</td> -->
                     <td>
                         <a 
@@ -60,9 +60,9 @@
                         </a>
                     </td>
                     <td>
-                        <a (click)="updateUserDialog(item)" style="margin-right: 10px; cursor: pointer;">
+                        <!-- <a (click)="updateUserDialog(item)" style="margin-right: 10px; cursor: pointer;">
                             <i title="Edit Lookup" class="fa fa-edit"></i>
-                        </a>
+                        </a> -->
                         
                         <!-- <i *ngIf="item.lookup_id <= 4" title="Edit Lookup" class="fa fa-edit fa-disabled" style="margin-right: 10px;"></i> -->
 

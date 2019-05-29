@@ -17,11 +17,22 @@ export class LoginService {
   createpasswordurl = '/activateuser';
   checkresetpassurl = '/checkresetpassurlstatus';
   validateotpurl = '/validateotp';
+  changepasswordurl = "/changepassword";
 
   headers = new Headers({
     'Content-Type': 'application/json'
   });
+
   constructor(private http: Http) { }
+
+  getToken() {
+    if (localStorage.getItem('login_user_info')) {
+      let currentUser = JSON.parse(localStorage.getItem('login_user_info'));
+      return currentUser.auth_token;
+    } else {
+      return " ";
+    }
+  }
   
   loginCheck(uname, pswd): Promise<any> {
     var data = {
@@ -99,6 +110,17 @@ export class LoginService {
     return this.http.post(this.checkresetpassurl, JSON.stringify(data), { headers: this.headers }).toPromise()
       .then(this.extractData)
       .catch(this.handleErrorPromise);
+  }
+
+  changePassword(item) : Promise<any> {
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.getToken()
+    });
+    return this.http.put(this.changepasswordurl, JSON.stringify(item), {headers:this.headers, withCredentials:true}).toPromise()
+    .then(this.extractData)
+    .catch(this.handleErrorPromise);
   }
 
 

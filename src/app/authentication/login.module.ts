@@ -12,7 +12,6 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginService } from './login.service';
 import { CookieService, CookieOptions } from 'angular2-cookie/core';
 
-
 export const routes = [
   { path: '', redirectTo:'login', pathMatch : 'full' },
   { path: 'login', component: LoginComponent },

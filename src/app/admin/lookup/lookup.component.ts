@@ -33,17 +33,20 @@ export class LookupComponent implements OnInit {
   showEmpty: boolean = true;
 
   ngOnInit() {
-    this.getLookupOptions();
+    this.getLookupOptions(null);
     // let userdata = JSON.parse(localStorage.getItem('sg_user_info')).user_permissions[13];
     // this.canCreate = parseInt(userdata.permission_type.split('')[0]);
     // this.canUpdate = parseInt(userdata.permission_type.split('')[2]);
     // this.canDelete = parseInt(userdata.permission_type.split('')[3]);
   }
 
-  getLookupOptions() {
+  getLookupOptions(lookup_name) {
     let filterObj = {};
     filterObj['page'] = this.currentPage;
     filterObj['per_page'] = this.pageSize;
+    if(lookup_name) {
+      filterObj['lookup_name'] = lookup_name;
+    }
     this.pagesService.getLookupOptions(filterObj)
       .then(data => {
         if (data.success) {
@@ -62,10 +65,15 @@ export class LookupComponent implements OnInit {
       );
   }
 
+  filterLookups(lookup_name) {
+    if(lookup_name)
+      this.getLookupOptions(lookup_name);
+  }
+
   public handlePage(e: any) {
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
-    this.getLookupOptions();
+    this.getLookupOptions(null);
   }
 
   public updateLookupDialog(lookup) {
@@ -78,7 +86,7 @@ export class LookupComponent implements OnInit {
     dialogRef.afterClosed().subscribe(data => {
       console.log(data);
       if (data == 'save') {
-        this.getLookupOptions();
+        this.getLookupOptions(null);
       }
     });
   }
@@ -99,7 +107,7 @@ export class LookupComponent implements OnInit {
           else
             message = "deleted";
           this.alertService.createAlert("Lookup " + message + " successfully", 1);
-          this.getLookupOptions();
+          this.getLookupOptions(null);
         }
         else {
           this.alertService.createAlert(data.message, 0);
