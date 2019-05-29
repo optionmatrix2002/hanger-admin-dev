@@ -15,7 +15,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   public form: FormGroup;
-  public show : false;
+  public show : boolean = false;
   public settings: Settings;
   constructor(public _cookieService: CookieService, public appSettings: AppSettings,
     public fb: FormBuilder, public router: Router,
