@@ -14,7 +14,7 @@
                         <button fxShow="false" fxShow.gt-xs *ngIf="settings.menu == 'vertical'" mat-icon-button (click)="settings.sidenavUserBlock = !settings.sidenavUserBlock">
                             <mat-icon>person</mat-icon>
                         </button>
-                        <a *ngIf="settings.menu == 'horizontal'" routerLink="/admin/dashboard" (click)="closeSubMenus()"><img src="../../assets/favicon.jpg" style="max-width: 47px;margin-top: 0px;margin-left: 15px;" class="logo" alt="Hanger"></a>
+                        <a *ngIf="settings.menu == 'horizontal'" routerLink="/admin/dashboard" (click)="closeSubMenus()"><img src="../../assets/img/Hanger-Horizontal-White.png" style="max-width: 190px;margin-top: 0px;margin-left: 15px;" class="logo" alt="Hanger"></a>
                     </div>
                     <mat-toolbar color="primary" *ngIf="settings.menu == 'horizontal'" class="horizontal-menu flex-p-x transition-2"
                         [class.sticky]="isStickyMenu" [class.fixed-top]="!settings.fixedHeader">

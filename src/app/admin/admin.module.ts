@@ -50,4 +50,5 @@ export const routes = [
     AddUserDialogComponent 
   ],
 })
+
 export class AdminModule { }
