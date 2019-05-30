@@ -22,11 +22,11 @@
                 </div>
                 <mat-card-content fxLayout="column" fxLayoutAlign="end center" class="box-content">
                     <mat-card fxLayout="column" fxLayoutAlign="center center" class="mat-elevation-z12 box-content-inner">
-                        <span class="box-content-header" style="margin-bottom: 15px; color: #283593 !important;">Validate OTP</span>
+                        <span class="box-content-header" style="margin-bottom: 15px; color: #283593 !important;">Enter verification code</span>
                         <span>Please enter verification code received from email.</span>
                         <mat-form-field class="w-100">
                             <input matInput placeholder="Email" formControlName="otp">
-                            <mat-error *ngIf="form.controls.otp.errors?.required">OTP is required</mat-error>
+                            <mat-error *ngIf="form.controls.otp.errors?.required">Verification is required</mat-error>
                         </mat-form-field>
                     </mat-card>
                     <div class="col-sm-10">

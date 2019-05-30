@@ -48,7 +48,7 @@ export class VerifyOTPComponent implements OnInit {
     if (this.form.valid) {
       this.loginService.validateOTP(this.user_id, values.otp).then(res => {
         if (res.success) {
-          this.alertService.createAlert('OTP has been validated. Please set your password', 1);
+          this.alertService.createAlert('Verification code has been validated. Please set your password', 1);
           this.router.navigate(['/resetpassword'], { queryParams: { user_id: this.user_id } });
         } else {
           this.alertService.createAlert(res.message, 0);
